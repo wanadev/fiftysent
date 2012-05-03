@@ -10,5 +10,5 @@
     secret            = "f3h=98|GWnDK52u|0mo2^QpkdfUVO*Tqy("
     mailer_transport  = smtp
     mailer_host       = localhost
-    mailer_user       = fviel
-    mailer_password   = wanaviel
+    mailer_user       = user
+    mailer_password   = password
