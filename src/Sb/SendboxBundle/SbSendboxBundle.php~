@@ -1,9 +1,0 @@
-<?php
-
-namespace Sb\Sendbox;
-
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-
-class SbSendboxBundle extends Bundle
-{
-}

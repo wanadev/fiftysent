@@ -1,9 +1,0 @@
-{% extends 'SbSendboxBundle::layout.html.twig' %}
-{% block title %}
-    {{ parent() }}
-    - Homepage
-{% endblock %}
-{% block content %}
-  <h1>Recherche</h1>
-
-{% endblock %}
