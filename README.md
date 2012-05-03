@@ -30,3 +30,9 @@ Création du répertoire d'upload
     chmod 777 web/bundles/sbsendbox/uploads
 
 Ready!
+
+Wiki
+----
+
+* [Installation de ZipArchive](https://github.com/wanadev/sendbox/wiki/Installation-de-ZipArchive)
+* [Comment contribuer](https://github.com/wanadev/sendbox/wiki/Comment-contribuer)
