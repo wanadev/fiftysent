@@ -13,8 +13,8 @@ Paramétrages de base
 
 Adaptez la configuration à vos besoins.
 
-`mkdir app/cache app/logs`
-`chmod 777 app/cache app/logs`
+`mkdir app/cache app/logs
+chmod 777 app/cache app/logs`
 
 Installation des vendors
 ------------------------
@@ -26,7 +26,7 @@ Vérifiez que l'extension phar.so et zip.so est activée dans votre php.ini.
 Création du répertoire d'upload
 -------------------------------
 
-`mkdir web/bundles/sbsendbox/uploads`
-`chmod 777 web/bundles/sbsendbox/uploads`
+`mkdir web/bundles/sbsendbox/uploads
+chmod 777 web/bundles/sbsendbox/uploads`
 
 Ready!
