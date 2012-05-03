@@ -1,0 +1,13 @@
+<div style="padding:0px 20px;margin: 0 auto; width:980px;">
+<div class="left" style="padding-left:20px;padding-right:10px;" >
+	<h3><a href="{{ url('homepage') }}">© 2010 Sendbox</a></h3>
+	<ul>
+    <li><a href="{{ url('homepage', { 'slug': 'cgv' }) }}">Conditions générales de vente</a></li>
+    <li><a href="{{ url('homepage', { 'slug': 'legal' }) }}">Mentions Légales</a></li>
+		<li><a href="{{ url('homepage', { 'slug': 'contact' }) }}">Nous contacter</a></li>
+	</ul>
+</div>
+<div class="left" style="padding-left:20px;" >
+	<h3><a href="{{ url('homepage') }}">A propos</a></h3>
+</div>
+{% block javascripts %}{% endblock %}

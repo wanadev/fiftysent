@@ -1,0 +1,31 @@
+
+<div style="margin:0;padding:10px;background-color:#f8f8f8;border:1px solid #dee3e4">
+  <table style="width:95%;margin:0 auto">
+    <tbody>
+      <tr>
+        <td style="font-family:helvetica,sans-serif;font-size:12px">
+          Veuillez trouver ci-dessous les fichiers partagés.
+        </td>
+      </tr>
+      <tr> 
+          <td style="text-align:center;font-size:12px;font-family:helvetica,sans-serif" colspan="2">
+            <ul style="width:250px;margin:auto;text-align:left;padding:0;list-style-type:none;list-style-position:inside">
+              {% for file in files %}
+                <li style="margin:0">{{ file.name }} ({{ file.size }})</li>
+              {% endfor %}
+            </ul>
+          </td>
+        </tr>
+        <tr> 
+          <td style="text-align:center;text-transform:uppercase;font-weight:bold;font-size:20px;font-family:helvetica,sans-serif" colspan="2">
+            <a target="_blank" style="text-decoration:none;color:#575757" href="{{ url('download', {'token': token}) }}"><img width="26" height="31" style="vertical-align:middle;border:0" alt="&#x21E9;" src="http://{{ app.request.host }}{{ asset('/bundles/sbsendbox/images/download.png') }}">&nbsp;Télécharger</a>
+          </td>
+        </tr>
+      <tr> 
+        <td style="font-family:Tahoma,helvetica,arial,verdana,sans-serif;font-size:12px"></td>
+        <td align="right" style="width:20%;text-align:right;font-family:helvetica,sans-serif;font-size:12px">{{ size }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="clear:both"></div>
+</div>

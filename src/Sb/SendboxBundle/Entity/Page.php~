@@ -1,0 +1,466 @@
+<?php
+
+namespace Sp\SpotoraBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Sp\SpotoraBundle\Entity\Announce
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class Page
+{
+  
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string $title
+     *
+     * @ORM\Column(name="title", type="string", length=255)
+     */
+    private $title;
+
+    /**
+     * @var text $description
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+    
+    /**
+     * @var text $slug
+     *
+     * @ORM\Column(name="slug", type="string", length=255)
+     */
+    private $slug;
+
+
+    /**
+     * To String
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set user_id
+     *
+     * @param integer $userId
+     */
+    public function setUserId($userId)
+    {
+        $this->user_id = $userId;
+    }
+
+    /**
+     * Get user_id
+     *
+     * @return integer 
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * Set category_id
+     *
+     * @param integer $categoryId
+     */
+    public function setCategoryId($categoryId)
+    {
+        $this->category_id = $categoryId;
+    }
+
+    /**
+     * Get category_id
+     *
+     * @return integer 
+     */
+    public function getCategoryId()
+    {
+        return $this->category_id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set description
+     *
+     * @param text $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * Get description
+     *
+     * @return text 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set city_id
+     *
+     * @param integer $cityId
+     */
+    public function setCityId($cityId)
+    {
+        $this->city_id = $cityId;
+    }
+
+    /**
+     * Get city_id
+     *
+     * @return integer 
+     */
+    public function getCityId()
+    {
+        return $this->city_id;
+    }
+
+    /**
+     * Set department_id
+     *
+     * @param integer $departmentId
+     */
+    public function setDepartmentId($departmentId)
+    {
+        $this->department_id = $departmentId;
+    }
+
+    /**
+     * Get department_id
+     *
+     * @return integer 
+     */
+    public function getDepartmentId()
+    {
+        return $this->department_id;
+    }
+
+    /**
+     * Set zip_id
+     *
+     * @param integer $zipId
+     */
+    public function setZipId($zipId)
+    {
+        $this->zip_id = $zipId;
+    }
+
+    /**
+     * Get zip_id
+     *
+     * @return integer 
+     */
+    public function getZipId()
+    {
+        return $this->zip_id;
+    }
+
+    /**
+     * Set price
+     *
+     * @param integer $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    }
+
+    /**
+     * Get price
+     *
+     * @return integer 
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set tags
+     *
+     * @param string $tags
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+    }
+
+    /**
+     * Get tags
+     *
+     * @return string 
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * Set kind
+     *
+     * @param boolean $kind
+     */
+    public function setKind($kind)
+    {
+        $this->kind = $kind;
+    }
+
+    /**
+     * Get kind
+     *
+     * @return boolean 
+     */
+    public function getKind()
+    {
+        return $this->kind;
+    }
+
+    /**
+     * Set view
+     *
+     * @param integer $view
+     */
+    public function setView($view)
+    {
+        $this->view = $view;
+    }
+
+    /**
+     * Get view
+     *
+     * @return integer 
+     */
+    public function getView()
+    {
+        return $this->view;
+    }
+
+    /**
+     * Set popular
+     *
+     * @param integer $popular
+     */
+    public function setPopular($popular)
+    {
+        $this->popular = $popular;
+    }
+
+    /**
+     * Get popular
+     *
+     * @return integer 
+     */
+    public function getPopular()
+    {
+        return $this->popular;
+    }
+
+    /**
+     * Set is_published
+     *
+     * @param boolean $isPublished
+     */
+    public function setIsPublished($isPublished)
+    {
+        $this->is_published = $isPublished;
+    }
+
+    /**
+     * Get is_published
+     *
+     * @return boolean 
+     */
+    public function getIsPublished()
+    {
+        return $this->is_published;
+    }
+
+    /**
+     * Set is_moderated
+     *
+     * @param boolean $isModerated
+     */
+    public function setIsModerated($isModerated)
+    {
+        $this->is_moderated = $isModerated;
+    }
+
+    /**
+     * Get is_moderated
+     *
+     * @return boolean 
+     */
+    public function getIsModerated()
+    {
+        return $this->is_moderated;
+    }
+
+    /**
+     * Set is_private
+     *
+     * @param boolean $isPrivate
+     */
+    public function setIsPrivate($isPrivate)
+    {
+        $this->is_private = $isPrivate;
+    }
+
+    /**
+     * Get is_private
+     *
+     * @return boolean 
+     */
+    public function getIsPrivate()
+    {
+        return $this->is_private;
+    }
+
+    /**
+     * Set is_spam
+     *
+     * @param boolean $isSpam
+     */
+    public function setIsSpam($isSpam)
+    {
+        $this->is_spam = $isSpam;
+    }
+
+    /**
+     * Get is_spam
+     *
+     * @return boolean 
+     */
+    public function getIsSpam()
+    {
+        return $this->is_spam;
+    }
+
+    /**
+     * Set finished_at
+     *
+     * @param datetime $finishedAt
+     */
+    public function setFinishedAt($finishedAt)
+    {
+        $this->finished_at = $finishedAt;
+    }
+
+    /**
+     * Get finished_at
+     *
+     * @return datetime 
+     */
+    public function getFinishedAt()
+    {
+        return $this->finished_at;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+}

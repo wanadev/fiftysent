@@ -1,0 +1,289 @@
+<?php
+    
+namespace Sp\SpotoraBundle\Entity;
+
+use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Sp\SpotoraBundle\Entity\Announce
+ *
+ * @ORM\Table()
+ * @ORM\Entity()
+ */
+class Location
+{
+
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+  
+    /**
+     * @var string $hexa
+     * @ORM\Column(name="hexa", length=20)
+     */
+    private $hexa;
+    
+     /**
+     * @var string $country
+     *
+     * @ORM\Column(name="country", length=4)
+     */
+    private $country;
+    
+   
+    /**
+     * @var string $city
+     *
+     * @ORM\Column(name="city", length=255)
+     */
+    private $city;
+    
+    /**
+     * @var string $zip
+     * 
+     * @ORM\Column(name="zip", length=11)
+     */
+    private $zip;
+    
+    /**
+     * @var string $department
+     *
+     * @ORM\Column(name="department", length=4)
+     */
+    private $department;
+    
+    /**
+     * @var string $region
+     *
+     * @ORM\Column(name="region", length=255)
+     */
+    private $region;
+
+    /**
+     * @var double $lat
+     *
+     * @ORM\Column(name="lat", nullable=true)
+     */
+    private $lat;
+    
+    /**
+     * @var double $lng
+     *
+     * @ORM\Column(name="lng", nullable=true)
+     */
+    private $lng;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Announce", mappedBy="location", cascade={"remove", "persist"})
+     */
+    private $announces;
+  
+
+    /**
+     * Set id
+     *
+     * @param string $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * Get id
+     *
+     * @return string 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set country
+     *
+     * @param string $country
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+    }
+
+    /**
+     * Get country
+     *
+     * @return string 
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string 
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set zip
+     *
+     * @param string $zip
+     */
+    public function setZip($zip)
+    {
+        $this->zip = $zip;
+    }
+
+    /**
+     * Get zip
+     *
+     * @return string 
+     */
+    public function getZip()
+    {
+        return $this->zip;
+    }
+
+    /**
+     * Set department
+     *
+     * @param string $department
+     */
+    public function setDepartment($department)
+    {
+        $this->department = $department;
+    }
+
+    /**
+     * Get department
+     *
+     * @return string 
+     */
+    public function getDepartment()
+    {
+        return $this->department;
+    }
+
+    /**
+     * Set region
+     *
+     * @param string $region
+     */
+    public function setRegion($region)
+    {
+        $this->region = $region;
+    }
+
+    /**
+     * Get region
+     *
+     * @return string 
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * Set lat
+     *
+     * @param string $lat
+     */
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+    }
+
+    /**
+     * Get lat
+     *
+     * @return string 
+     */
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    /**
+     * Set lng
+     *
+     * @param string $lng
+     */
+    public function setLng($lng)
+    {
+        $this->lng = $lng;
+    }
+
+    /**
+     * Get lng
+     *
+     * @return string 
+     */
+    public function getLng()
+    {
+        return $this->lng;
+    }
+    public function __construct()
+    {
+        $this->announces = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add announces
+     *
+     * @param Sp\SpotoraBundle\Entity\Announce $announces
+     */
+    public function addAnnounce(\Sp\SpotoraBundle\Entity\Announce $announces)
+    {
+        $this->announces[] = $announces;
+    }
+
+    /**
+     * Get announces
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getAnnounces()
+    {
+        return $this->announces;
+    }
+
+    /**
+     * Set hexa
+     *
+     * @param string $hexa
+     */
+    public function setHexa($hexa)
+    {
+        $this->hexa = $hexa;
+    }
+
+    /**
+     * Get hexa
+     *
+     * @return string 
+     */
+    public function getHexa()
+    {
+        return $this->hexa;
+    }
+}

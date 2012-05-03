@@ -1,0 +1,19 @@
+# Bootstrap
+app/bootstrap*
+
+# Symfony directories
+vendor/*
+*/logs/*
+*/cache/*
+web/uploads/*
+web/bundles/*
+web/js
+web/css
+
+# Configuration files
+app/config/parameters.ini
+app/config/deploy.rb
+
+composer.phar
+composer.lock
+Capfile

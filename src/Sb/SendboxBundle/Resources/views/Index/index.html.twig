@@ -1,0 +1,155 @@
+{% extends "SbSendboxBundle::layout.html.twig" %}
+{% block stylesheets %}
+  {{ parent() }}
+
+  {% stylesheets
+    '@SbSendboxBundle/Resources/public/css/fileuploader.css'
+    '@SbSendboxBundle/Resources/public/css/jquery.tagsinput.css'
+  %}
+     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
+  {% endstylesheets %}
+{% endblock %}
+{% block javascripts %}
+  {{ parent() }}
+  {% javascripts
+    '@SbSendboxBundle/Resources/public/js/plupload.js'
+    '@SbSendboxBundle/Resources/public/js/plupload.html5.js'
+    '@SbSendboxBundle/Resources/public/js/plupload.flash.js'
+    '@SbSendboxBundle/Resources/public/js/jquery.tagsinput.min.js'
+    '@SbSendboxBundle/Resources/public/js/jquery.scrollTo-1.4.2-min.js'
+    '@SbSendboxBundle/Resources/public/js/bootstrap-tooltip.js'
+    '@SbSendboxBundle/Resources/public/js/bootstrap-popover.js'
+  %}
+   <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock %}
+{% block content %}
+   
+<div style="position:relative;top:10%;">
+<h1 class="left" id="title">Post &amp; Send files</h1>
+<div style="clear:both"></div>
+<div class="publish">
+  <form id="upload_form">
+  <div id="uploader">
+    <div id="dropdown">Drop files here.</div>
+    <div id="pickfiles" title="Ajouter des fichiers" data-content="Cliquez dans la zone pour ajouter des fichiers" class="tagsinput overflow" style="width: 475px; height: 100px;">No runtime found.</div>
+    <div id="progress"><div class="qq-upload-size"></div></div>
+  </div>
+  <div style="border-top:1px solid #E8E8E8;padding-top:10px;">
+    <div class="row_form"><input type="text" title="Votre email" data-content="Email de l'emmetteur" name="fromMail" id="fromMail" rel="empty" value="Votre email" style="display:block;" /></div>
+    <div id="destMail" title="Les emails destinataires" data-content="Appuyez sur TAB ou ENTER pour valider un mail" class="row_form"><input type="text" id="toMail" name="toMail" style="display:block;" /></div>
+    <input type="button" id="sendMail" class="btn btn-success disabled right" value="Envoyer" disabled="disabled"/>
+    <div class="clear"></div>
+  </div>
+  </form>
+</div> </div>
+   <script>
+    $("#fromMail").focus(function() {
+      if($(this).val()=="Votre email"){
+        $(this).val('');
+      }
+   });
+   $("#fromMail").blur(function() {
+      if($(this).val()==""){
+        $(this).val('Votre email');
+      }
+   });
+
+    function isValidFileDrag(e){
+      var dt = e.dataTransfer,
+        // do not check dt.types.contains in webkit, because it crashes safari 4            
+        isWebkit = navigator.userAgent.indexOf("AppleWebKit") > -1;                        
+
+      // dt.effectAllowed is none in Safari 5
+      // dt.types.contains check is for firefox            
+      return dt && dt.effectAllowed != 'none' && 
+        (dt.files || (!isWebkit && dt.types.contains && dt.types.contains('Files')));
+    }
+    
+    $('#toMail').tagsInput({'width':'475px','height':'50px','defaultText':'Les emails destinaires'});     
+
+    var uploader = new plupload.Uploader({
+      runtimes : 'html5,flash',
+      flash_swf_url : '{{ asset('/bundles/sbsendbox/js/plupload.flash.swf') }}',
+      browse_button : 'pickfiles',
+      drop_element : 'dropdown',
+      container: 'uploader',
+      max_file_size : '1gb',
+      chunk_size : '5mb',
+      url : "{{ path('upload') }}"
+    });
+
+    uploader.bind('Init', function(up, params) {
+      $('#pickfiles').html("");
+      $('#pickfiles').append('<button>Cliquez pour t&eacute;l&eacute;charger des fichiers</button>')
+    });
+
+    uploader.bind('FilesAdded', function(up, files) {
+      for (var i in files) {
+        $('#pickfiles').append('<span id="' + files[i].id + '" class="tag"><span>' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <img src="" /></span></span>');
+      }
+    });
+
+    uploader.bind('UploadProgress', function(up, file) {
+      $('#'+file.id).css('background-color', 'rgb('+(252-file.percent*209/100)+', '+(204+file.percent*48/100)+', 9)');
+      $('#'+file.id).css('border-color', 'rgb('+(202-file.percent*209/100)+', '+(154+file.percent*48/100)+', 9)');
+      $('#progress .qq-upload-size').css('width', up.total.percent+'%');
+    });
+
+    uploader.bind('QueueChanged', function(up) {
+      $('#progress').css('display', 'block');
+      $('#pickfiles button').hide();
+      up.start();
+      return false;
+    });
+
+    uploader.bind('UploadComplete', function(up, files) {
+      $('#sendMail').removeAttr('disabled');
+      $('#sendMail').removeClass('disabled');
+    });
+
+    uploader.bind('BeforeUpload', function(up, file) {
+      $('#'+file.id+' img').attr('src', '{{ asset('/bundles/sbsendbox/images/mini-loader.gif') }}');
+      $('#pickfiles').scrollTo($('#'+file.id));
+      $('#'+file.id+'-loader').show();
+    });
+
+    uploader.bind('FileUploaded', function(up, file) {
+      $('#'+file.id+' img').attr('src', '{{ asset('/bundles/sbsendbox/images/icons/accept.png') }}');
+    });
+
+    uploader.init();
+    
+    $("#validCaptcha").click(function() {
+        $("#recaptcha-container").hide();
+        $("#upload_form").show();
+    });
+
+    $('#uploader').bind('dragenter', function(e) {
+      if (!isValidFileDrag(e)) return;
+      $('#dropdown').show();
+    });
+
+    $('#uploader').bind('dragleave', function(e) {
+      if (!isValidFileDrag(e)) return;
+      $('#dropdown').hide();
+    });
+
+    $("#sendMail").click(function() {
+      $.ajax({
+        type: "post",
+        url: "{{ path('send') }}",
+        data: $('form').serialize(),
+        success: function(msg){
+          if(msg=="SUCCESS")
+            $('.publish').html('Votre message a été correctement envoyé');
+          else
+            $('.publish').html(msg);
+        }
+      });
+    });
+
+    $('#pickfiles,#fromMail,#destMail').popover();
+
+   </script>
+{% endblock %}

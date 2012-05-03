@@ -1,0 +1,17 @@
+homepage:
+  pattern:   /
+  defaults:  { _controller: SbSendboxBundle:Index:index }
+  
+# Announce Manager
+
+search:
+  pattern:   /search
+  defaults:  { _controller: SbSendboxBundle:Search:index }
+  
+# Ajax actions
+  
+ax_location_find:
+  pattern:   /ax/find/location.html
+  defaults:  { _controller: SbSendboxBundle:Location:AxFindLocation }
+
+

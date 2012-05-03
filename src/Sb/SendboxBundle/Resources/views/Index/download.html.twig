@@ -1,0 +1,46 @@
+{% extends "SbSendboxBundle::layout.html.twig" %}
+{% block stylesheets %}
+  {{ parent() }}
+  {% stylesheets
+    '@SbSendboxBundle/Resources/public/css/fileuploader.css'
+  %}
+     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
+     <link href='http://fonts.googleapis.com/css?family=Raleway:100|Droid+Sans' rel='stylesheet' type='text/css'>
+  {% endstylesheets %}
+{% endblock %}
+{% block content %}
+   
+<div style="position:relative;top:5%;">
+<h1 class="left" id="title">Download files</h1>
+<div style="clear:both"></div>
+<div class="publish">
+<div class="file-list" style="width:300px;height:250px;margin:auto;overflow-y:auto;overflow-x:hidden">
+  <ul style="margin:0">
+    {% for file in files %}
+      <li>{{ file.name }} ({{ file.size }})</li>
+    {% endfor %}
+  </ul>
+</div>
+<div id="loader">
+  <img src="{{ asset('/bundles/sbsendbox/images/ajax-loader.gif') }}" alt="ajax-loader" />
+  <p>Grabbing files...</p>
+</div>
+<div id="download">
+  <a class="btn" href="#" title="{{ token }}">T&eacute;l&eacute;charger les fichiers</a>
+</div>
+</div> </div>
+<script>
+  $(function() {
+    $.ajax({
+      url: '{{ path('generate', {'token': token}) }}',
+      dataType: 'json',
+      success: function(file) {
+        $('#loader').hide();
+        $('#download a').attr('href', file.path);
+        $('#download a').attr('title', file.name);
+        $('#download').show();
+      }
+    });
+  });
+</script>
+{% endblock %}

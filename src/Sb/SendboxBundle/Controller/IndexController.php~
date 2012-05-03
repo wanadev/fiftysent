@@ -1,0 +1,27 @@
+<?php
+
+namespace Sb\SendboxBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Response;
+use Sb\SendboxBundle\Uploader\qqFileUploader;
+
+class IndexController extends Controller
+{
+    public function indexAction()
+    {
+
+        return $this->container->get('templating')->renderResponse('SbSendboxBundle:User:register.html.twig');
+    }
+    
+    public function uploadAction($uploadDirectory = '/bundles/spspotora/uploads/')
+    {
+        $allowedExtensions = array();
+        $sizeLimit = 10 * 1024 * 1024;
+        $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+        $result = $uploader->handleUpload($_SERVER['DOCUMENT_ROOT'].$uploadDirectory);
+        return new Response(htmlspecialchars(json_encode($result), ENT_NOQUOTES));
+    }
+}

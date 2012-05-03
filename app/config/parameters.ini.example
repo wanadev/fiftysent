@@ -1,0 +1,14 @@
+[parameters]
+    database_driver   = pdo_mysql
+    database_host     = localhost
+    database_name     = test_project
+    database_user     = root
+    database_password = password
+    database_charset  = UTF8
+    database_port     = 3306
+    locale            = fr
+    secret            = "f3h=98|GWnDK52u|0mo2^QpkdfUVO*Tqy("
+    mailer_transport  = smtp
+    mailer_host       = localhost
+    mailer_user       = fviel
+    mailer_password   = wanaviel

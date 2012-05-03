@@ -1,0 +1,21 @@
+homepage:
+  pattern:   /
+  defaults:  { _controller: SbSendboxBundle:Index:index }
+
+download:
+  pattern:  /download/{token}.html
+  defaults: { _controller: SbSendboxBundle:Index:download }
+  
+
+# Ajax actions
+send:
+  pattern:   /send.html
+  defaults:  { _controller: SbSendboxBundle:Index:send }
+
+upload:
+  pattern:   /upload.html
+  defaults:  { _controller: SbSendboxBundle:Index:upload }
+
+generate:
+  pattern:  /generate/{token}.html
+  defaults: { _controller: SbSendboxBundle:Index:generateGzip }
