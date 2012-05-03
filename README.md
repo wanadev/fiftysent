@@ -19,7 +19,7 @@ Adaptez la configuration à vos besoins.
 Installation des vendors
 ------------------------
 
-Vérifiez que l'extension _phar.so_ et _zip.so_ est activée dans votre _php.ini_.
+Vérifiez que l'extension _phar.so_ et _zip.so_ sont activées dans votre _php.ini_.
 
     php bin/vendors install
 
