@@ -17,3 +17,5 @@ app/config/deploy.rb
 composer.phar
 composer.lock
 Capfile
+
+*~
