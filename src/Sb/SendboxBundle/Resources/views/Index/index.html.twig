@@ -86,13 +86,13 @@
 
     uploader.bind('FilesAdded', function(up, files) {
       for (var i in files) {
-        $('#pickfiles').append('<span id="' + files[i].id + '" class="tag"><span>' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <img src="" /></span></span>');
+        $('#pickfiles').append('<span id="' + files[i].id + '" class="tag btn"><span>' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <img src="" /></span></span>');
       }
     });
 
     uploader.bind('UploadProgress', function(up, file) {
-      $('#'+file.id).css('background-color', 'rgb('+(247-file.percent*156/100)+', '+(197-file.percent*13/100)+', '+(25+file.percent*66/100)+')');
-      $('#'+file.id).css('border-color', 'rgb('+(197-file.percent*156/100)+', '+(147-file.percent*13/100)+', '+(25+file.percent*66/100)+')');
+      //$('#'+file.id).css('background-color', 'rgb('+(247-file.percent*156/100)+', '+(197-file.percent*13/100)+', '+(25+file.percent*66/100)+')');
+      $('#'+file.id).css('border-color', 'rgba('+(197-file.percent*156/100)+', '+(147-file.percent*13/100)+', '+(25+file.percent*66/100)+', 0.5)');
       $('#progress .qq-upload-size').css('width', up.total.percent+'%');
     });
 
@@ -115,7 +115,8 @@
     });
 
     uploader.bind('FileUploaded', function(up, file) {
-      $('#'+file.id+' img').attr('src', '{{ asset('/bundles/sbsendbox/images/icons/accept.png') }}');
+      $('#'+file.id+' img').remove();
+      $('#'+file.id).append('<i class="icon-ok"></i>');
     });
 
     uploader.init();

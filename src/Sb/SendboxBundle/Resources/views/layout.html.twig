@@ -18,8 +18,9 @@
         {% block stylesheets %}
           <link href='http://fonts.googleapis.com/css?family=Quicksand|Droid+Sans' rel='stylesheet' type='text/css'>
           {% stylesheets 
-            '@SbSendboxBundle/Resources/public/css/bootstrap.min.css'
+            'bundles/sbsendbox/css/bootstrap.min.css'
             '@SbSendboxBundle/Resources/public/css/main.css' 
+            filter='cssrewrite'
           %}
             <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
           {% endstylesheets %}

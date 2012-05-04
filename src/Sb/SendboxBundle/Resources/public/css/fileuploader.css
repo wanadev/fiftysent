@@ -90,6 +90,12 @@ span.tag img {
   top: 3px;
 }
 
+span.tag i {
+  position: absolute;
+  right: 4px;
+  top: 3px;
+}
+
 #pickfiles span.tag {
   width: 213px;
   height: 13px;
