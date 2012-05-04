@@ -91,8 +91,8 @@
     });
 
     uploader.bind('UploadProgress', function(up, file) {
-      $('#'+file.id).css('background-color', 'rgb('+(252-file.percent*209/100)+', '+(204+file.percent*48/100)+', 9)');
-      $('#'+file.id).css('border-color', 'rgb('+(202-file.percent*209/100)+', '+(154+file.percent*48/100)+', 9)');
+      $('#'+file.id).css('background-color', 'rgb('+(247-file.percent*56/100)+', '+(197-file.percent*13/100)+', '+(25+file.percent*166/100)+')');
+      $('#'+file.id).css('border-color', 'rgb('+(197-file.percent*56/100)+', '+(147-file.percent*13/100)+', '+(25+file.percent*166/100)+')');
       $('#progress .qq-upload-size').css('width', up.total.percent+'%');
     });
 
