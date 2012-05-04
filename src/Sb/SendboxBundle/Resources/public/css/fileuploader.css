@@ -107,6 +107,7 @@ span.tag i {
 #pickfiles span.tag span {
   width: 199px;
   overflow: hidden;
+  display: inline-block;
 }
 
 #pickfiles:hover {
