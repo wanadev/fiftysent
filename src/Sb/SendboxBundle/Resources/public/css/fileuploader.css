@@ -104,6 +104,11 @@ span.tag i {
   text-align: left;
 }
 
+#pickfiles span.tag span {
+  width: 199px;
+  overflow: hidden;
+}
+
 #pickfiles:hover {
   cursor: pointer;
 }
