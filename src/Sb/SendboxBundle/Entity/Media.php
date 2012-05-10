@@ -70,13 +70,11 @@ class Media
     
     /**
      * @ORM\Column(name="created_at",type="datetime")
-     * @Gedmo\Timestampable(on="create")
      */
     private $created_at;
     
      /**
      * @ORM\Column(name="updated_at",type="datetime")
-     * @Gedmo\Timestampable(on="update")
      */
     private $updated_at;
 

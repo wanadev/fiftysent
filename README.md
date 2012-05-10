@@ -26,8 +26,8 @@ Vérifiez que l'extension _phar.so_ et _zip.so_ sont activées dans votre _php.i
 Création du répertoire d'upload
 -------------------------------
 
-    mkdir web/bundles/sbsendbox/uploads
-    chmod 777 web/bundles/sbsendbox/uploads
+    mkdir web/uploads
+    chmod 777 web/uploads
 
 Ready!
 
