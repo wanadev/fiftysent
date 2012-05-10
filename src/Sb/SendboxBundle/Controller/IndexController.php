@@ -127,7 +127,7 @@ class IndexController extends Controller
   {
     $md5 = str_split($token);
     $path = implode('/', $md5);
-    return $_SERVER['DOCUMENT_ROOT'].'/bundles/sbsendbox/uploads/'.date('Y').'/'.date('m').'/'.$path.'/';
+    return $_SERVER['DOCUMENT_ROOT'].'/uploads/'.date('Y').'/'.date('m').'/'.$path.'/';
   }
   
   public function getUrlByToken($token)
