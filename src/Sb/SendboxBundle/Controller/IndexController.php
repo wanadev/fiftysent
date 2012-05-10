@@ -134,7 +134,7 @@ class IndexController extends Controller
   {
     $md5 = str_split($token);
     $path = implode('/', $md5);
-    return '/bundles/sbsendbox/uploads/'.date('Y').'/'.date('m').'/'.$path.'/';
+    return '/uploads/'.date('Y').'/'.date('m').'/'.$path.'/';
   }
 
   private function generateToken($size = 8)
