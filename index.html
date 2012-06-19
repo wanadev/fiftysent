@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="FiftySent : Partage de gros fichiers par email. Code PHP. Développé par Wanadev" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>FiftySent</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/wanadev/fiftysent">View on GitHub</a>
+
+          <h1 id="project_title">FiftySent</h1>
+          <h2 id="project_tagline">Partage de gros fichiers par email. Code PHP. Développé par Wanadev</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/wanadev/fiftysent/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/wanadev/fiftysent/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>Installation de FiftySent</h1>
+
+<h2>Récupérer les sources</h2>
+
+<pre><code>git clone git://github.com/wanadev/fiftysent.git
+</code></pre>
+
+<h2>Paramétrages de base</h2>
+
+<pre><code>mv app/config/parameters.ini.example app/config/parameters.ini
+</code></pre>
+
+<p>Adaptez la configuration à vos besoins.</p>
+
+<pre><code>mkdir app/cache app/logs
+chmod 777 app/cache app/logs
+</code></pre>
+
+<h2>Installation des vendors</h2>
+
+<p>Vérifiez que l'extension <em>phar.so</em> et <em>zip.so</em> sont activées dans votre <em>php.ini</em>.</p>
+
+<pre><code>php bin/vendors install
+</code></pre>
+
+<h2>Création du répertoire d'upload</h2>
+
+<pre><code>mkdir web/uploads
+chmod 777 web/uploads
+</code></pre>
+
+<p>Ready!</p>
+
+<h3>Wiki</h3>
+
+<ul>
+<li><a href="https://github.com/wanadev/fiftysent/wiki/Installation-de-ZipArchive">Installation de ZipArchive</a></li>
+<li><a href="https://github.com/wanadev/fiftysent/wiki/Comment-contribuer">Comment contribuer</a></li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">FiftySent maintained by <a href="https://github.com/wanadev">wanadev</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
