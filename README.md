@@ -1,10 +1,10 @@
-Installation de Sendbox
-=======================
+Installation de FiftySent
+=========================
 
 Récupérer les sources
 ---------------------
 
-    git clone git://github.com/wanadev/sendbox.git
+    git clone git://github.com/wanadev/fiftysent.git
 
 Paramétrages de base
 --------------------
@@ -33,5 +33,5 @@ Ready!
 
 ### Wiki ###
 
-* [Installation de ZipArchive](https://github.com/wanadev/sendbox/wiki/Installation-de-ZipArchive)
-* [Comment contribuer](https://github.com/wanadev/sendbox/wiki/Comment-contribuer)
+* [Installation de ZipArchive](https://github.com/wanadev/fiftysent/wiki/Installation-de-ZipArchive)
+* [Comment contribuer](https://github.com/wanadev/fiftysent/wiki/Comment-contribuer)
