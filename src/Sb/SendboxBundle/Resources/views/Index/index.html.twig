@@ -24,23 +24,24 @@
 {% block content %}
    
 <div style="position:relative;top:10%;">
-<h1 class="left" id="title">Post &amp; Send files</h1>
-<div style="clear:both"></div>
-<div class="publish">
-  <form id="upload_form">
-  <div id="uploader">
-    <div id="dropdown">Drop files here.</div>
-    <div id="pickfiles" title="Ajouter des fichiers" data-content="Cliquez dans la zone pour ajouter des fichiers" class="tagsinput overflow span6" style="height: 100px;margin-left:0">No runtime found.</div>
-    <div id="progress"><div class="qq-upload-size"></div></div>
+  <h1 class="left" id="title">Post &amp; Send files</h1>
+  <div style="clear:both"></div>
+  <div class="publish">
+    <form id="upload_form">
+      <div id="uploader">
+        <div id="dropdown">Drop files here.</div>
+        <div id="pickfiles" title="Ajouter des fichiers" data-content="Cliquez dans la zone pour ajouter des fichiers" class="tagsinput overflow span6" style="height: 100px;margin-left:0">No runtime found.</div>
+        <div id="progress"><div class="qq-upload-size"></div></div>
+      </div>
+      <div style="border-top:1px solid #E8E8E8;padding-top:10px;">
+        <div class="row_form"><input type="text" title="Votre email" data-content="Email de l'emmetteur" name="fromMail" id="fromMail" rel="empty" value="Votre email" style="display:block;" /></div>
+        <div id="destMail" style="margin-left:0" title="Les emails destinataires" data-content="Appuyez sur TAB ou ENTER pour valider un mail" class="row_form span6"><input type="text" id="toMail" name="toMail" style="display:block;" /></div>
+        <button id="sendMail" class="btn btn-success disabled right" disabled="disabled">Envoyer <i class="icon-envelope icon-white"></i></button>
+        <div class="clear"></div>
+      </div>
+    </form>
   </div>
-  <div style="border-top:1px solid #E8E8E8;padding-top:10px;">
-    <div class="row_form"><input type="text" title="Votre email" data-content="Email de l'emmetteur" name="fromMail" id="fromMail" rel="empty" value="Votre email" style="display:block;" /></div>
-    <div id="destMail" style="margin-left:0" title="Les emails destinataires" data-content="Appuyez sur TAB ou ENTER pour valider un mail" class="row_form span6"><input type="text" id="toMail" name="toMail" style="display:block;" /></div>
-    <button id="sendMail" class="btn btn-success disabled right" disabled="disabled">Envoyer <i class="icon-envelope icon-white"></i></button>
-    <div class="clear"></div>
-  </div>
-  </form>
-</div> </div>
+</div>
    <script>
     $("#fromMail").focus(function() {
       if($(this).val()=="Votre email"){
