@@ -30,12 +30,12 @@
     <form id="upload_form">
       <div id="uploader">
         <div id="dropdown">Drop files here.</div>
-        <div id="pickfiles" title="Ajouter des fichiers" data-content="Cliquez dans la zone pour ajouter des fichiers" class="tagsinput overflow span6" style="height: 100px;margin-left:0">No runtime found.</div>
+        <div id="pickfiles" title="Ajouter des fichiers" data-content="Cliquez dans la zone pour ajouter des fichiers" class="tagsinput overflow" style="height: 100px;margin-left:0;box-sizing:border-box;-moz-box-sizing:border-box;width:100%">No runtime found.</div>
         <div id="progress"><div class="qq-upload-size"></div></div>
       </div>
       <div style="border-top:1px solid #E8E8E8;padding-top:10px;">
-        <div class="row_form"><input type="text" title="Votre email" data-content="Email de l'emmetteur" name="fromMail" id="fromMail" rel="empty" value="Votre email" style="display:block;" /></div>
-        <div id="destMail" style="margin-left:0" title="Les emails destinataires" data-content="Appuyez sur TAB ou ENTER pour valider un mail" class="row_form span6"><input type="text" id="toMail" name="toMail" style="display:block;" /></div>
+        <input type="text" title="Votre email" data-content="Email de l'emmetteur" name="fromMail" id="fromMail" rel="empty" value="Votre email" style="display:block;" />
+        <div id="destMail" style="margin-left:0;box-sizing:border-box;-moz-box-sizing:border-box;width:100%" title="Les emails destinataires" data-content="Appuyez sur TAB ou ENTER pour valider un mail"><input type="text" id="toMail" name="toMail" style="display:block;" /></div>
         <button id="sendMail" class="btn btn-success disabled right" disabled="disabled">Envoyer <i class="icon-envelope icon-white"></i></button>
         <div class="clear"></div>
       </div>
@@ -65,7 +65,7 @@
         (dt.files || (!isWebkit && dt.types.contains && dt.types.contains('Files')));
     }
     
-    $('#toMail').tagsInput({'height':'50px','defaultText':'Les emails destinaires'});     
+    $('#toMail').tagsInput({'width':'100%','-moz-box-sizing':'border-box','height':'50px','defaultText':'Les emails destinaires'});     
 
     var uploader = new plupload.Uploader({
       runtimes : 'html5,flash',
@@ -150,7 +150,9 @@
       return false;
     });
 
-    $('#pickfiles,#destMail').popover();
+    $('#pickfiles,#destMail').popover({
+      trigger: 'hover'
+    });
 
    </script>
 {% endblock %}
