@@ -4,7 +4,8 @@
 
   {% stylesheets
     '@SbSendboxBundle/Resources/public/css/fileuploader.css'
-    '@SbSendboxBundle/Resources/public/css/jquery.tagsinput.css'
+    'bundles/sbsendbox/css/chosen.css'
+    filter='cssrewrite'
   %}
      <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
   {% endstylesheets %}
@@ -15,7 +16,7 @@
     '@SbSendboxBundle/Resources/public/js/plupload.js'
     '@SbSendboxBundle/Resources/public/js/plupload.html5.js'
     '@SbSendboxBundle/Resources/public/js/plupload.flash.js'
-    'SbSendboxBundle/Resources/public/js/chosen.jquery.min.js'
+    '@SbSendboxBundle/Resources/public/js/chosen.jquery.min.js'
     '@SbSendboxBundle/Resources/public/js/jquery.scrollTo-1.4.2-min.js'
   %}
    <script type="text/javascript" src="{{ asset_url }}"></script>
