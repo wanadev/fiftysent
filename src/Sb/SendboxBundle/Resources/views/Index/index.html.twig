@@ -66,12 +66,12 @@
 
     uploader.bind('Init', function(up, params) {
       $('#pickfiles').html("");
-      $('#pickfiles').append('<em>Cliquez pour t&eacute;l&eacute;charger des fichiers</em>')
+      $('#pickfiles').append('<em style="text-align:center">Cliquez pour t&eacute;l&eacute;charger des fichiers</em>')
     });
 
     uploader.bind('FilesAdded', function(up, files) {
       for (var i in files) {
-        $('#pickfiles').append('<span id="' + files[i].id + '" class="tag btn"><span>' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <img src="" /></span></span>');
+        $('#pickfiles').append('<span id="' + files[i].id + '" class="btn"><span>' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <img src="" /></span></span>');
       }
     });
 

@@ -6,8 +6,11 @@ body, input, label {
 
 #uploader{
   margin-bottom: 20px;
-  text-align: center;
   position:relative;
+}
+
+#uploader em {
+  text-align: center;
 }
 
 #filelist {
@@ -24,7 +27,7 @@ body, input, label {
 }
 
 #progress {
-  width: 418px;
+  width: 100%;
   margin:0 auto;
   margin-top: 15px;
   padding: 1px;
@@ -44,18 +47,6 @@ body, input, label {
 #download {
   display: none;
   text-align: center;
-}
-
-#dropdown {
-  display:none;
-  position: absolute;
-  width:488px;
-  height:67px;
-  border: 1px solid #E8E8E8;
-  top: 0;
-  background:white;
-  text-align: center;
-  line-height: 5;
 }
 
 .qq-upload-drop-area {
@@ -83,33 +74,10 @@ body, input, label {
 .qq-upload-failed-text {display:none;}
 .qq-upload-fail .qq-upload-failed-text {display:inline;}
 
-span.tag img {
-  vertical-align: middle;
-  position: absolute;
-  right: 4px;
-  top: 3px;
-}
-
-span.tag i {
-  position: absolute;
-  right: 4px;
-  top: 3px;
-}
-
-#pickfiles span.tag {
-  width: 213px;
-  height: 13px;
-  position: relative;
-  overflow: hidden;
-  text-align: left;
-}
-
-#pickfiles span.tag span {
-  width: 199px;
-  overflow: hidden;
-  display: inline-block;
-}
-
 #pickfiles:hover {
   cursor: pointer;
+}
+
+#pickfiles .btn {
+  margin: 2px;
 }
