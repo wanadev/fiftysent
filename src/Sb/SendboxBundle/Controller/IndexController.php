@@ -8,7 +8,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Sb\SendboxBundle\Uploader\SbUploader;
-use Sb\SendboxBundle\Form\MediaType;
 use ZipArchive;
 
 class IndexController extends Controller
