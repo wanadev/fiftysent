@@ -5,6 +5,7 @@
         "doctrine/orm":     "*",
         "twig/extensions":  "*",
 
+        "doctrine/doctrine-bundle":       "*",
         "symfony/assetic-bundle":         "*",
         "sensio/generator-bundle":        "*",
         "sensio/framework-extra-bundle":  "*",
