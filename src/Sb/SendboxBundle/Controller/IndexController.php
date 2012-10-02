@@ -17,8 +17,7 @@ class IndexController extends Controller
   {
     $this->get('session')->set('token',$this->generateToken());
     $container = $this->container;
-    $form = $this->createForm(new MediaType());
-    return $this->container->get('templating')->renderResponse('SbSendboxBundle:Index:index.html.twig',array('form' => $form->createView()));
+    return $this->container->get('templating')->renderResponse('SbSendboxBundle:Index:index.html.twig');
   }
   
   public function uploadAction(Request $request)
