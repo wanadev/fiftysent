@@ -24,22 +24,22 @@
 {% endblock %}
 {% block content %}
    
-  <h1 class="left" id="title">Post &amp; Send files</h1>
-  <div style="clear:both"></div>
-  <div class="publish">
-    <form id="upload_form">
-      <div id="uploader">
-        <div id="pickfiles" title="Ajouter des fichiers" class="overflow" style="">No runtime found.</div>
-        <div id="progress"><div class="qq-upload-size"></div></div>
-      </div>
-      <div id="mailer">
-        <input type="text" title="Votre email" name="fromMail" id="fromMail" rel="empty" value="Votre email" />
-        <select data-placeholder="Liste des destinataires..." multiple="multiple" id="toMail" name="toMail" style="width:100%"></select><br />
-        <button id="sendMail" class="btn btn-success disabled right" disabled="disabled">Envoyer <i class="icon-envelope icon-white"></i></button>
-        <div class="clear"></div>
-      </div>
-    </form>
-  </div>
+<h1 class="left" id="title">Post &amp; Send files</h1>
+<div style="clear:both"></div>
+<div class="publish">
+  <form id="upload_form">
+    <div id="uploader">
+      <div id="pickfiles" title="Ajouter des fichiers" class="overflow" style="">No runtime found.</div>
+      <div id="progress"><div class="upload-size"></div></div>
+    </div>
+    <div id="mailer">
+      <input type="text" title="Votre email" name="fromMail" id="fromMail" rel="empty" value="Votre email" />
+      <select data-placeholder="Liste des destinataires..." multiple="multiple" id="toMail" name="toMail" style="width:100%"></select><br />
+      <button id="sendMail" class="btn btn-success disabled right" disabled="disabled">Envoyer <i class="icon-envelope icon-white"></i></button>
+      <div class="clear"></div>
+    </div>
+  </form>
+</div>
    <script>
     $("#fromMail").focus(function() {
       if($(this).val()=="Votre email"){ 
@@ -76,7 +76,7 @@
     uploader.bind('UploadProgress', function(up, file) {
       //$('#'+file.id).css('background-color', 'rgb('+(247-file.percent*156/100)+', '+(197-file.percent*13/100)+', '+(25+file.percent*66/100)+')');
       $('#'+file.id).css('border-color', 'rgba('+(197-file.percent*156/100)+', '+(147-file.percent*13/100)+', '+(25+file.percent*66/100)+', 0.5)');
-      $('#progress .qq-upload-size').css('width', up.total.percent+'%');
+      $('#progress .upload-size').css('width', up.total.percent+'%');
     });
 
     uploader.bind('QueueChanged', function(up) {
