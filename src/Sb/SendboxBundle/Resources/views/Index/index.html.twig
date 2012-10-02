@@ -30,7 +30,6 @@
   <div class="publish">
     <form id="upload_form">
       <div id="uploader">
-        <div id="dropdown">Drop files here.</div>
         <div id="pickfiles" title="Ajouter des fichiers" data-content="Cliquez dans la zone pour ajouter des fichiers" class="tagsinput overflow" style="height: 100px;margin-left:0;box-sizing:border-box;-moz-box-sizing:border-box;width:100%">No runtime found.</div>
         <div id="progress"><div class="qq-upload-size"></div></div>
       </div>
@@ -54,23 +53,11 @@
         $(this).val('Votre email');
       }
    });
-
-    function isValidFileDrag(e){
-      var dt = e.dataTransfer,
-        // do not check dt.types.contains in webkit, because it crashes safari 4            
-        isWebkit = navigator.userAgent.indexOf("AppleWebKit") > -1;                        
-
-      // dt.effectAllowed is none in Safari 5
-      // dt.types.contains check is for firefox            
-      return dt && dt.effectAllowed != 'none' && 
-        (dt.files || (!isWebkit && dt.types.contains && dt.types.contains('Files')));
-    }
     
     var uploader = new plupload.Uploader({
       runtimes : 'html5,flash',
       flash_swf_url : '{{ asset('/bundles/sbsendbox/js/plupload.flash.swf') }}',
       browse_button : 'pickfiles',
-      drop_element : 'dropdown',
       container: 'uploader',
       max_file_size : '1gb',
       chunk_size : '5mb',
