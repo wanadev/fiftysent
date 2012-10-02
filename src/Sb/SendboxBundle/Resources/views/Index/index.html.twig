@@ -24,24 +24,22 @@
 {% endblock %}
 {% block content %}
    
-<div style="position:relative;top:10%;">
   <h1 class="left" id="title">Post &amp; Send files</h1>
   <div style="clear:both"></div>
   <div class="publish">
     <form id="upload_form">
       <div id="uploader">
-        <div id="pickfiles" title="Ajouter des fichiers" class="tagsinput overflow" style="height: 100px;margin-left:0;box-sizing:border-box;-moz-box-sizing:border-box;width:100%">No runtime found.</div>
+        <div id="pickfiles" title="Ajouter des fichiers" class="overflow" style="">No runtime found.</div>
         <div id="progress"><div class="qq-upload-size"></div></div>
       </div>
-      <div style="border-top:1px solid #E8E8E8;padding-top:10px;">
-        <input type="text" title="Votre email" name="fromMail" id="fromMail" rel="empty" value="Votre email" style="display:block;" />
-        <select data-placeholder="Liste des destinataires..." multiple="multiple" id="toMail" name="toMail" style="box-sizing:border-box;-moz-box-sizing:border-box;width:100%"></select><br />
+      <div id="mailer">
+        <input type="text" title="Votre email" name="fromMail" id="fromMail" rel="empty" value="Votre email" />
+        <select data-placeholder="Liste des destinataires..." multiple="multiple" id="toMail" name="toMail" style="width:100%"></select><br />
         <button id="sendMail" class="btn btn-success disabled right" disabled="disabled">Envoyer <i class="icon-envelope icon-white"></i></button>
         <div class="clear"></div>
       </div>
     </form>
   </div>
-</div>
    <script>
     $("#fromMail").focus(function() {
       if($(this).val()=="Votre email"){ 

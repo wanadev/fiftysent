@@ -9,10 +9,6 @@ body, input, label {
   position:relative;
 }
 
-#uploader em {
-  text-align: center;
-}
-
 #filelist {
   text-align: left;
 }
@@ -74,6 +70,12 @@ body, input, label {
 .qq-upload-failed-text {display:none;}
 .qq-upload-fail .qq-upload-failed-text {display:inline;}
 
+#pickfiles {
+  height: 100px;
+  margin-left:0;
+  width:100%
+}
+
 #pickfiles:hover {
   cursor: pointer;
 }
@@ -86,4 +88,9 @@ body, input, label {
   padding: 20px;
   background-color: white;
   border: 1px solid #e8e8e8;
+}
+
+#mailer {
+  border-top:1px solid #E8E8E8;
+  padding-top:10px;
 }
