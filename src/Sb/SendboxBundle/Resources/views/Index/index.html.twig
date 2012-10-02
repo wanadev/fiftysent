@@ -30,12 +30,12 @@
   <div class="publish">
     <form id="upload_form">
       <div id="uploader">
-        <div id="pickfiles" title="Ajouter des fichiers" data-content="Cliquez dans la zone pour ajouter des fichiers" class="tagsinput overflow" style="height: 100px;margin-left:0;box-sizing:border-box;-moz-box-sizing:border-box;width:100%">No runtime found.</div>
+        <div id="pickfiles" title="Ajouter des fichiers" class="tagsinput overflow" style="height: 100px;margin-left:0;box-sizing:border-box;-moz-box-sizing:border-box;width:100%">No runtime found.</div>
         <div id="progress"><div class="qq-upload-size"></div></div>
       </div>
       <div style="border-top:1px solid #E8E8E8;padding-top:10px;">
-        <input type="text" title="Votre email" data-content="Email de l'emmetteur" name="fromMail" id="fromMail" rel="empty" value="Votre email" style="display:block;" />
-        <div id="destMail" style="margin-left:0;box-sizing:border-box;-moz-box-sizing:border-box;width:100%" title="Les emails destinataires" data-content="Appuyez sur TAB ou ENTER pour valider un mail"><input type="text" id="toMail" name="toMail" style="display:block;" /></div>
+        <input type="text" title="Votre email" name="fromMail" id="fromMail" rel="empty" value="Votre email" style="display:block;" />
+        <select data-placeholder="Liste des destinataires..." multiple="multiple" id="toMail" style="box-sizing:border-box;-moz-box-sizing:border-box;width:100%"></select><br />
         <button id="sendMail" class="btn btn-success disabled right" disabled="disabled">Envoyer <i class="icon-envelope icon-white"></i></button>
         <div class="clear"></div>
       </div>
@@ -44,7 +44,7 @@
 </div>
    <script>
     $("#fromMail").focus(function() {
-      if($(this).val()=="Votre email"){
+      if($(this).val()=="Votre email"){ 
         $(this).val('');
       }
    });
@@ -66,7 +66,7 @@
 
     uploader.bind('Init', function(up, params) {
       $('#pickfiles').html("");
-      $('#pickfiles').append('<button>Cliquez pour t&eacute;l&eacute;charger des fichiers</button>')
+      $('#pickfiles').append('<em>Cliquez pour t&eacute;l&eacute;charger des fichiers</em>')
     });
 
     uploader.bind('FilesAdded', function(up, files) {
@@ -136,9 +136,6 @@
       return false;
     });
 
-    $('#pickfiles,#destMail').popover({
-      trigger: 'hover'
-    });
     $('#toMail').chosen();
 
    </script>
