@@ -3,3 +3,10 @@ security:
         strategy:             affirmative
         allow_if_all_abstain:  false
         allow_if_equal_granted_denied:  true
+    providers:
+        memory:
+            name:                memory
+            users:
+                admin:
+                    password:            password
+                    roles:               [ROLE_USER, ROLE_ADMIN]
