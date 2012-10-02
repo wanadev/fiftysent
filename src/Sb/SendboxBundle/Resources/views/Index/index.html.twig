@@ -66,8 +66,6 @@
         (dt.files || (!isWebkit && dt.types.contains && dt.types.contains('Files')));
     }
     
-    $('#toMail').tagsInput({'width':'100%','-moz-box-sizing':'border-box','height':'50px','defaultText':'Les emails destinaires'});     
-
     var uploader = new plupload.Uploader({
       runtimes : 'html5,flash',
       flash_swf_url : '{{ asset('/bundles/sbsendbox/js/plupload.flash.swf') }}',
