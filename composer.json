@@ -9,7 +9,8 @@
         "sensio/generator-bundle":        "*",
         "sensio/framework-extra-bundle":  "*",
         "sensio/distribution-bundle":     "*",
-        "jms/security-extra-bundle":      "*"
+        "jms/security-extra-bundle":      "*",
+        "swiftmailer/swiftmailer":        "*"
     },
 
     "autoload": {
