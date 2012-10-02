@@ -6,7 +6,3 @@ security:
     providers:
         memory:
             name:                memory
-            users:
-                admin:
-                    password:            password
-                    roles:               [ROLE_USER, ROLE_ADMIN]
