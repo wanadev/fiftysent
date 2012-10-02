@@ -39,9 +39,15 @@
       <header id="header"></header>
       {% block messages %}{% endblock %}
       <div id="content" class="container">
-        {% if _content is not empty %}
-          {{ _content|raw }}
-        {% endif %}
+        <div class="row">
+          <div class="span3">&nbsp;</div>
+          <div class="span6">
+            {% if _content is not empty %}
+              {{ _content|raw }}
+            {% endif %}
+          </div>
+          <div class="span3">&nbsp;</div>
+        </div>
       </div>
       <footer id="footer" style="width:100%;position:fixed;bottom:0px;">
         {% include 'SbSendboxBundle::footer.html.twig'%}

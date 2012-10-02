@@ -81,3 +81,9 @@ body, input, label {
 #pickfiles .btn {
   margin: 2px;
 }
+
+.publish {
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #e8e8e8;
+}
