@@ -10,7 +10,8 @@
         "sensio/framework-extra-bundle":  "*",
         "sensio/distribution-bundle":     "*",
         "jms/security-extra-bundle":      "*",
-        "swiftmailer/swiftmailer":        "*"
+        "swiftmailer/swiftmailer":        "*",
+        "symfony/monolog-bundle":         "*"
     },
 
     "autoload": {
