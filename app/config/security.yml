@@ -5,5 +5,8 @@ security:
         allow_if_equal_granted_denied:  true
     providers:
         administrators:
-            memory:
-                name:                memory
+            memory: ~
+    firewalls:
+        admin_area:
+            pattern:    ^/admin
+            http_basic: ~
