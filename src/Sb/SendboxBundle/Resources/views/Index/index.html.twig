@@ -35,7 +35,7 @@
       </div>
       <div style="border-top:1px solid #E8E8E8;padding-top:10px;">
         <input type="text" title="Votre email" name="fromMail" id="fromMail" rel="empty" value="Votre email" style="display:block;" />
-        <select data-placeholder="Liste des destinataires..." multiple="multiple" id="toMail" style="box-sizing:border-box;-moz-box-sizing:border-box;width:100%"></select><br />
+        <select data-placeholder="Liste des destinataires..." multiple="multiple" id="toMail" name="toMail" style="box-sizing:border-box;-moz-box-sizing:border-box;width:100%"></select><br />
         <button id="sendMail" class="btn btn-success disabled right" disabled="disabled">Envoyer <i class="icon-envelope icon-white"></i></button>
         <div class="clear"></div>
       </div>
@@ -83,7 +83,7 @@
 
     uploader.bind('QueueChanged', function(up) {
       $('#progress').css('display', 'block');
-      $('#pickfiles button').hide();
+      $('#pickfiles em').hide();
       up.start();
       return false;
     });
