@@ -2,8 +2,6 @@ body, input, label {
   font-family: 'Droid Sans', sans-serif !important;
 }
 
-.qq-uploader { position:relative; width: 100%;}
-
 #uploader{
   margin-bottom: 20px;
   position:relative;
