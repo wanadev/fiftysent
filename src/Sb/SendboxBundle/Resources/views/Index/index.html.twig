@@ -106,16 +106,6 @@
 
     uploader.init();
     
-    $('#uploader').bind('dragenter', function(e) {
-      if (!isValidFileDrag(e)) return;
-      $('#dropdown').show();
-    });
-
-    $('#uploader').bind('dragleave', function(e) {
-      if (!isValidFileDrag(e)) return;
-      $('#dropdown').hide();
-    });
-
     $("#sendMail").click(function() {
       $.ajax({
         type: "post",
