@@ -136,7 +136,10 @@
       return false;
     });
 
-    $('#toMail').chosen();
+    $('#toMail').chosen({
+      create_option: true,
+      persistent_create_option: true
+    });
 
    </script>
 {% endblock %}
