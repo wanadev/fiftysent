@@ -4,5 +4,6 @@ security:
         allow_if_all_abstain:  false
         allow_if_equal_granted_denied:  true
     providers:
-        memory:
-            name:                memory
+        administrators:
+            memory:
+                name:                memory
