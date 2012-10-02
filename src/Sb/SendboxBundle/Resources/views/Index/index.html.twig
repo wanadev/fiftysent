@@ -106,11 +106,6 @@
 
     uploader.init();
     
-    $("#validCaptcha").click(function() {
-        $("#recaptcha-container").hide();
-        $("#upload_form").show();
-    });
-
     $('#uploader').bind('dragenter', function(e) {
       if (!isValidFileDrag(e)) return;
       $('#dropdown').show();
