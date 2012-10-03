@@ -28,7 +28,7 @@
 <div class="publish">
   <form id="upload_form">
     <div id="uploader">
-      <div id="pickfiles" title="Ajouter des fichiers" class="overflow" style="">No runtime found.</div>
+      <div id="pickfiles" class="overflow" style="">No runtime found.</div>
       <div id="progress"><div class="upload-size"></div></div>
     </div>
     <div id="mailer">
@@ -36,6 +36,7 @@
       <select data-placeholder="Liste des destinataires..." multiple="multiple" id="toMail" name="toMail" style="width:100%"></select><br />
       <button id="sendMail" class="btn btn-success disabled right" disabled="disabled">Envoyer <i class="icon-envelope icon-white"></i></button>
     </div>
+    <div id="result"></div>
   </form>
 </div>
 {% endblock %}
@@ -110,10 +111,17 @@
         url: "{{ path('send') }}",
         data: $('form').serialize(),
         success: function(msg){
-          if(msg=="SUCCESS")
-            $('.publish').html('Votre message a été correctement envoyé');
-          else
-            $('.publish').html(msg);
+          var alert = document.createElement('div');
+          $(alert).addClass('alert');
+          if(msg=="SUCCESS") {
+            $(alert).addClass('alert-success');
+            $(alert).html('Votre message a été correctement envoyé.');
+          }
+          else {
+            $(alert).addClass('alert-error');
+            $(alert).html(msg);
+          }
+          $('#result').append(alert);
         }
       });
       return false;
