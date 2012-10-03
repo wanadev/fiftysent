@@ -119,10 +119,40 @@
       return false;
     });
 
+    loadFromStorage();
     $('#toMail').chosen({
-      create_option: true,
+      create_option: function(term) {
+        var chosen = this;
+        addToStorage(term);
+        chosen.append_option({
+          value: term,
+          text: term
+        });
+      },
       persistent_create_option: true
     });
+
+    function addToStorage(term)
+    {
+      var stored = localStorage.getItem('fiftysent');
+      stored = stored.split(',');
+      stored.push(term);
+      localStorage.setItem('fiftysent', stored);
+    }
+
+    function loadFromStorage()
+    {
+      var stored = localStorage.getItem('fiftysent');
+      stored = stored.split(',');
+      var options = [];
+      for (i in stored) {
+        var opt = document.createElement('option');
+        opt.text = stored[i];
+        opt.value = stored[i];
+        options.push(opt);
+      }
+      $('#toMail').append(options);
+    }
 
    </script>
 {% endblock %}
