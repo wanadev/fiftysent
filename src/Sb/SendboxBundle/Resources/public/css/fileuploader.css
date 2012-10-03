@@ -2,6 +2,10 @@ body, input, label {
   font-family: 'Droid Sans', sans-serif !important;
 }
 
+body {
+  background-image: url('/bundles/sbsendbox/images/bg.png');
+}
+
 #uploader{
   margin-bottom: 20px;
   position:relative;

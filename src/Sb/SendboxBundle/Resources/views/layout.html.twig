@@ -27,7 +27,7 @@
         {% endblock %}
         <link rel="shortcut icon" href="{{ asset('/bundles/sbsendbox/favicon.ico') }}" />
     </head>
-    <body style="background-image: url('{{ asset('/bundles/sbsendbox/images/bg.png') }}')">
+    <body>
     {% if _javascript is not empty %}
       <script>
         $(function() {
@@ -36,7 +36,6 @@
       </script>
     {% endif %}
     {% block body %}
-      <header id="header"></header>
       {% block messages %}{% endblock %}
       <div id="content" class="container">
         <div class="row">
