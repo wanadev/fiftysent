@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Sb\SendboxBundle\Uploader\SbUploader;
 use ZipArchive;
 use Sb\SendboxBundle\Entity\DestEmail;
+use Swift_Message;
 
 class IndexController extends Controller
 {
@@ -77,7 +78,7 @@ class IndexController extends Controller
 
       $toMail = $request->get('toMail');
       $toMail = explode(',', $toMail);
-      $message = \Swift_Message::newInstance()
+      $message = Swift_Message::newInstance()
       ->setSubject('Invitation à télécharger des fichiers')
       ->setFrom($email)
       ->setTo($toMail)
