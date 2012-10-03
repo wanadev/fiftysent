@@ -11,6 +11,7 @@ use Sb\SendboxBundle\Uploader\SbUploader;
 use ZipArchive;
 use Sb\SendboxBundle\Entity\DestEmail;
 use Swift_Message;
+use SimpleXMLElement;
 
 class IndexController extends Controller
 {
@@ -41,7 +42,7 @@ class IndexController extends Controller
           $newsXML = simplexml_load_file($path.$token.'.xml');
         }
         else {
-          $newsXML = new \SimpleXMLElement("<upload></upload>");
+          $newsXML = new SimpleXMLElement("<upload></upload>");
           $newsXML->addAttribute('token', $token);
         }
         $newsIntro = $newsXML->addChild('file',$result['filename']);
