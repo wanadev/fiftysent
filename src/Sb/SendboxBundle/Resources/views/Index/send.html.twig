@@ -1,31 +1,18 @@
-
-<div style="margin:0;padding:10px;background-color:#f8f8f8;border:1px solid #dee3e4">
-  <table style="width:95%;margin:0 auto">
-    <tbody>
-      <tr>
-        <td style="font-family:helvetica,sans-serif;font-size:12px">
-          Veuillez trouver ci-dessous les fichiers partagés.
-        </td>
-      </tr>
-      <tr> 
-          <td style="text-align:center;font-size:12px;font-family:helvetica,sans-serif" colspan="2">
-            <ul style="width:570px;margin:auto;text-align:left;padding:0;list-style-type:none;list-style-position:inside">
-              {% for file in files %}
-                <li style="margin:0">{{ file.name }} ({{ file.size }})</li>
-              {% endfor %}
-            </ul>
-          </td>
-        </tr>
-        <tr> 
-          <td style="text-align:center;text-transform:uppercase;font-weight:bold;font-size:20px;font-family:helvetica,sans-serif" colspan="2">
-            <a target="_blank" style="text-decoration:none;color:#575757" href="{{ url('download', {'token': token}) }}"><img width="26" height="31" style="vertical-align:middle;border:0" alt="&#x21E9;" src="http://{{ app.request.host }}{{ asset('/bundles/sbsendbox/images/download.png') }}">&nbsp;Télécharger</a>
-          </td>
-        </tr>
-      <tr> 
-        <td style="font-family:Tahoma,helvetica,arial,verdana,sans-serif;font-size:12px"></td>
-        <td align="right" style="width:20%;text-align:right;font-family:helvetica,sans-serif;font-size:12px">{{ size }}</td>
-      </tr>
-    </tbody>
-  </table>
+<div id="content" class="container" style="width: 550px;margin-right: auto;margin-left: auto;position: relative;margin: 0 auto;clear: both;height: 100%;zoom: 1">
+  <div style="position:relative;top:5%;">
+  <h1 class="left" id="title" style="margin: 0;font-family: sans-serif;font-weight: normal;color: #353333;text-rendering: optimizelegibility;font-size: 38px;line-height: 36px;padding: 0;border: 0;font-style: normal;float: left;margin-bottom: 18px">Download files</h1>
   <div style="clear:both"></div>
+    <div class="publish" style="background: #FFF;border: 1px solid #E8E8E8;padding: 30px;min-height: 265px">
+      <div class="file-list" style="width:300px;height:250px;margin:auto;overflow-y:auto;overflow-x:hidden">
+        <ul style="margin: 0;padding: 0;list-style: none;border: 0;font-weight: normal;font-style: normal;font-size: 100%;line-height: 1;font-family: inherit">
+          {% for file in files %}
+            <li style="line-height: 18px;margin: 0;padding: 0;border: 0;font-weight: normal;font-style: normal;font-size: 100%;font-family: inherit;color: #808080">{{ file.name }} ({{ file.size }})</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div id="download" style="text-align: center">
+        <a class="btn" href="{{ url('download', {'token': token}) }}" style="color: #3A77C2;text-decoration: none;display: inline-block;padding: 4px 10px 4px;margin-bottom: 0;font-size: 13px;line-height: 18px;text-align: center;text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);vertical-align: middle;cursor: pointer;background-color: #f5f5f5;background-image: -moz-linear-gradient(top, #fff, #e6e6e6);background-repeat: repeat-x;border: 1px solid #ccc;border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);border-bottom-color: #b3b3b3;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);margin: 0;font-weight: inherit;font-style: normal;font-family: inherit">Télécharger les fichiers {{ size }}</a>
+      </div>
+    </div>
+  </div>
 </div>
