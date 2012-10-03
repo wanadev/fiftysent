@@ -135,7 +135,7 @@
     function addToStorage(term)
     {
       var stored = localStorage.getItem('fiftysent');
-      if (typeof stored != 'undefined') {
+      if (stored != null) {
         stored = stored.split(',');
         stored.push(term);
       }
@@ -148,7 +148,7 @@
     function loadFromStorage()
     {
       var stored = localStorage.getItem('fiftysent');
-      if (typeof stored != 'undefined') {
+      if (stored != null) {
         stored = stored.split(',');
       }
       else {
