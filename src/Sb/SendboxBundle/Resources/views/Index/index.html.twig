@@ -124,11 +124,13 @@
     $('#toMail').chosen({
       create_option: function(term) {
         var chosen = this;
-        addToStorage(term);
-        chosen.append_option({
-          value: term,
-          text: term
-        });
+        $.post("{{ path('validate') }}", {email: term}, function(data) {
+          addToStorage(data);
+          chosen.append_option({
+            value: data,
+            text: data
+          });
+        }, 'json');
       },
       persistent_create_option: true
     });

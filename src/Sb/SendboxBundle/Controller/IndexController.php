@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Sb\SendboxBundle\Uploader\SbUploader;
 use ZipArchive;
+use Sb\SendboxBundle\Entity\DestEmail;
 
 class IndexController extends Controller
 {
@@ -119,6 +120,22 @@ class IndexController extends Controller
     }
 
     return new Response(htmlspecialchars(json_encode($return), ENT_NOQUOTES));
+  }
+
+  public function validateAction(Request $request)
+  {
+    $email = $request->get('email');
+    $de = new DestEmail();
+    $de->setEmail($email);
+
+    $validator = $this->get('validator');
+    $errors = $validator->validate($author);
+
+    if (count($errors) > 0) {
+        return new Response(htmlspecialchars(json_encode(array('status' => 'failure', 'value' => $errors), ENT_NOQUOTES));
+    } else {
+        return new Response(htmlspecialchars(json_encode(array('status' => 'success', 'value' => $email), ENT_NOQUOTES));
+    }
   }
   
   public function getPathByToken($token)
