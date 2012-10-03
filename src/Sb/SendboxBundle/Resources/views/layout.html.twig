@@ -7,14 +7,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, inital-scale=1.0">
     <title>{% block title %}FiftySent{% endblock %}</title>
-    {% block javascripts %}
-      {% javascripts
-          '@SbSendboxBundle/Resources/public/js/jquery-1.7.1.min.js'
-          '@SbSendboxBundle/Resources/public/js/bootstrap.min.js'
-     %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-      {% endjavascripts %}
-    {% endblock %}
     {% block stylesheets %}
       <link href='http://fonts.googleapis.com/css?family=Quicksand|Droid+Sans' rel='stylesheet' type='text/css'>
       {% stylesheets 
@@ -22,8 +14,8 @@
         'bundles/sbsendbox/css/bootstrap-responsive.min.css'
         filter='cssrewrite'
       %}
-        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
-      {% endstylesheets %}
+      <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
+    {% endstylesheets %}
     {% endblock %}
     <link rel="shortcut icon" href="{{ asset('/bundles/sbsendbox/favicon.ico') }}" />
   </head>
@@ -44,6 +36,14 @@
         {% include 'SbSendboxBundle::footer.html.twig'%}
       </footer>
     </div>  
+  {% endblock %}
+  {% block javascripts %}
+    {% javascripts
+        '@SbSendboxBundle/Resources/public/js/jquery-1.7.1.min.js'
+        '@SbSendboxBundle/Resources/public/js/bootstrap.min.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
   {% endblock %}
   {% if _javascript is not empty %}
       {{ _javascript|raw }}
