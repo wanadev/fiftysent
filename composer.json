@@ -5,7 +5,7 @@
         "twig/twig": ">=1.9.1,<2.0-dev",
 
         "symfony/assetic-bundle":         "2.1.0",
-        "sensio/generator-bundle":        "*",
+        "sensio/generator-bundle":        "2.1.0",
         "sensio/framework-extra-bundle":  "*",
         "sensio/distribution-bundle":     "*",
         "jms/security-extra-bundle":      "*",
