@@ -39,13 +39,13 @@
       {% block messages %}{% endblock %}
       <div id="content" class="container">
         <div class="row">
-          <div class="span3 hidden-phone hidden-tablet">&nbsp;</div>
+          <div class="span3 hidden-phone">&nbsp;</div>
           <div class="span6">
             {% if _content is not empty %}
               {{ _content|raw }}
             {% endif %}
           </div>
-          <div class="span3 hidden-phone hidden-tablet">&nbsp;</div>
+          <div class="span3 hidden-phone">&nbsp;</div>
         </div>
         <footer>
           {% include 'SbSendboxBundle::footer.html.twig'%}
