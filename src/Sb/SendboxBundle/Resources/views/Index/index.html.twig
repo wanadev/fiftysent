@@ -112,14 +112,20 @@
         data: $('form').serialize(),
         success: function(msg){
           var alert = document.createElement('div');
+          var button = document.createElement('button');
+          button.type = "button";
+          $(button).attr('data-dismiss', 'alert');
+          $(button).addClass('close');
+          $(button).text('x');
           $(alert).addClass('alert');
+          $(alert).html(button);
           if(msg=="SUCCESS") {
             $(alert).addClass('alert-success');
-            $(alert).html('Votre message a été correctement envoyé.');
+            $(alert).append('Votre message a été correctement envoyé.');
           }
           else {
             $(alert).addClass('alert-error');
-            $(alert).html(msg);
+            $(alert).append(msg);
           }
           $('#result').append(alert);
         }
