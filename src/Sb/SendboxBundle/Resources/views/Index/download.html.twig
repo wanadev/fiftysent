@@ -9,7 +9,6 @@
   {% endstylesheets %}
 {% endblock %}
 {% block content %}
-   
 <h1 class="left" id="title">Download files</h1>
 <div style="clear:both"></div>
 <div class="publish">
@@ -28,6 +27,8 @@
     <a class="btn" href="#" title="{{ token }}">T&eacute;l&eacute;charger les fichiers</a>
   </div>
 </div>
+{% endblock %}
+{% block javascript %}
 <script>
   $(function() {
     $.ajax({
