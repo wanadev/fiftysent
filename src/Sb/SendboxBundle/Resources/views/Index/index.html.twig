@@ -23,7 +23,6 @@
 {% endjavascripts %}
 {% endblock %}
 {% block content %}
-   
 <h1 class="left" id="title">Post &amp; Send files</h1>
 <div style="clear:both"></div>
 <div class="publish">
@@ -39,7 +38,9 @@
     </div>
   </form>
 </div>
-   <script>
+{% endblock %}
+{% block javascript %}
+<script>
     $("#fromMail").focus(function() {
       if($(this).val()=="Votre email"){ 
         $(this).val('');
@@ -163,5 +164,5 @@
       }
       $('#toMail').append(options);
     }
-   </script>
+</script>
 {% endblock %}

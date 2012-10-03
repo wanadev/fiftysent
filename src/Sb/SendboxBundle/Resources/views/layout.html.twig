@@ -3,54 +3,50 @@
 {% set _javascript  = block('javascript') %}
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, inital-scale=1.0">
-        <title>{% block title %}FiftySent{% endblock %}</title>
-        {% block javascripts %}
-          {% javascripts
-              '@SbSendboxBundle/Resources/public/js/jquery-1.7.1.min.js'
-              '@SbSendboxBundle/Resources/public/js/bootstrap.min.js'
-         %}
-            <script type="text/javascript" src="{{ asset_url }}"></script>
-          {% endjavascripts %}
-        {% endblock %}
-        {% block stylesheets %}
-          <link href='http://fonts.googleapis.com/css?family=Quicksand|Droid+Sans' rel='stylesheet' type='text/css'>
-          {% stylesheets 
-            'bundles/sbsendbox/css/bootstrap.min.css'
-            'bundles/sbsendbox/css/bootstrap-responsive.min.css'
-            filter='cssrewrite'
-          %}
-            <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
-          {% endstylesheets %}
-        {% endblock %}
-        <link rel="shortcut icon" href="{{ asset('/bundles/sbsendbox/favicon.ico') }}" />
-    </head>
-    <body>
-    {% if _javascript is not empty %}
-      <script>
-        $(function() {
-          {{ _javascript|raw }}
-        });
-      </script>
-    {% endif %}
-    {% block body %}
-      {% block messages %}{% endblock %}
-      <div id="content" class="container">
-        <div class="row">
-          <div class="span3 hidden-phone">&nbsp;</div>
-          <div class="span6">
-            {% if _content is not empty %}
-              {{ _content|raw }}
-            {% endif %}
-          </div>
-          <div class="span3 hidden-phone">&nbsp;</div>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, inital-scale=1.0">
+    <title>{% block title %}FiftySent{% endblock %}</title>
+    {% block javascripts %}
+      {% javascripts
+          '@SbSendboxBundle/Resources/public/js/jquery-1.7.1.min.js'
+          '@SbSendboxBundle/Resources/public/js/bootstrap.min.js'
+     %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+      {% endjavascripts %}
+    {% endblock %}
+    {% block stylesheets %}
+      <link href='http://fonts.googleapis.com/css?family=Quicksand|Droid+Sans' rel='stylesheet' type='text/css'>
+      {% stylesheets 
+        'bundles/sbsendbox/css/bootstrap.min.css'
+        'bundles/sbsendbox/css/bootstrap-responsive.min.css'
+        filter='cssrewrite'
+      %}
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
+      {% endstylesheets %}
+    {% endblock %}
+    <link rel="shortcut icon" href="{{ asset('/bundles/sbsendbox/favicon.ico') }}" />
+  </head>
+  <body>
+  {% block body %}
+    {% block messages %}{% endblock %}
+    <div id="content" class="container">
+      <div class="row">
+        <div class="span3 hidden-phone">&nbsp;</div>
+        <div class="span6">
+          {% if _content is not empty %}
+            {{ _content|raw }}
+          {% endif %}
         </div>
-        <footer>
-          {% include 'SbSendboxBundle::footer.html.twig'%}
-        </footer>
-      </div>  
-     {% endblock %}
-    </body>
+        <div class="span3 hidden-phone">&nbsp;</div>
+      </div>
+      <footer>
+        {% include 'SbSendboxBundle::footer.html.twig'%}
+      </footer>
+    </div>  
+  {% endblock %}
+  {% if _javascript is not empty %}
+      {{ _javascript|raw }}
+  {% endif %}
+  </body>
 </html>
