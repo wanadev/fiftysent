@@ -19,3 +19,7 @@ upload:
 generate:
   pattern:  /generate/{token}.html
   defaults: { _controller: SbSendboxBundle:Index:generateGzip }
+
+validate:
+  pattern:  /validate.html
+  defaults: { _controller: SbSendboxBundle:Index:validate }

@@ -4,7 +4,8 @@
 
   {% stylesheets
     '@SbSendboxBundle/Resources/public/css/fileuploader.css'
-    '@SbSendboxBundle/Resources/public/css/jquery.tagsinput.css'
+    'bundles/sbsendbox/css/chosen.css'
+    filter='cssrewrite'
   %}
      <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
   {% endstylesheets %}
@@ -15,37 +16,34 @@
     '@SbSendboxBundle/Resources/public/js/plupload.js'
     '@SbSendboxBundle/Resources/public/js/plupload.html5.js'
     '@SbSendboxBundle/Resources/public/js/plupload.flash.js'
-    '@SbSendboxBundle/Resources/public/js/jquery.tagsinput.min.js'
+    '@SbSendboxBundle/Resources/public/js/chosen.jquery.min.js'
     '@SbSendboxBundle/Resources/public/js/jquery.scrollTo-1.4.2-min.js'
-    '@SbSendboxBundle/Resources/public/js/bootstrap-tooltip.js'
-    '@SbSendboxBundle/Resources/public/js/bootstrap-popover.js'
   %}
    <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
 {% endblock %}
 {% block content %}
-   
-<div style="position:relative;top:10%;">
 <h1 class="left" id="title">Post &amp; Send files</h1>
 <div style="clear:both"></div>
 <div class="publish">
   <form id="upload_form">
-  <div id="uploader">
-    <div id="dropdown">Drop files here.</div>
-    <div id="pickfiles" title="Ajouter des fichiers" data-content="Cliquez dans la zone pour ajouter des fichiers" class="tagsinput overflow" style="width: 475px; height: 100px;">No runtime found.</div>
-    <div id="progress"><div class="qq-upload-size"></div></div>
-  </div>
-  <div style="border-top:1px solid #E8E8E8;padding-top:10px;">
-    <div class="row_form"><input type="text" title="Votre email" data-content="Email de l'emmetteur" name="fromMail" id="fromMail" rel="empty" value="Votre email" style="display:block;" /></div>
-    <div id="destMail" title="Les emails destinataires" data-content="Appuyez sur TAB ou ENTER pour valider un mail" class="row_form"><input type="text" id="toMail" name="toMail" style="display:block;" /></div>
-    <button id="sendMail" class="btn btn-success disabled right" disabled="disabled">Envoyer <i class="icon-envelope icon-white"></i></button>
-    <div class="clear"></div>
-  </div>
+    <div id="uploader">
+      <div id="pickfiles" class="overflow" style="">No runtime found.</div>
+      <div id="progress"><div class="upload-size"></div></div>
+    </div>
+    <div id="mailer">
+      <input type="text" title="Votre email" name="fromMail" id="fromMail" rel="empty" value="Votre email" />
+      <select data-placeholder="Liste des destinataires..." multiple="multiple" id="toMail" name="toMail" style="width:100%"></select><br />
+      <button id="sendMail" class="btn btn-success disabled right" disabled="disabled">Envoyer <i class="icon-envelope icon-white"></i></button>
+    </div>
+    <div id="result"></div>
   </form>
-</div> </div>
-   <script>
+</div>
+{% endblock %}
+{% block javascript %}
+<script>
     $("#fromMail").focus(function() {
-      if($(this).val()=="Votre email"){
+      if($(this).val()=="Votre email"){ 
         $(this).val('');
       }
    });
@@ -54,25 +52,11 @@
         $(this).val('Votre email');
       }
    });
-
-    function isValidFileDrag(e){
-      var dt = e.dataTransfer,
-        // do not check dt.types.contains in webkit, because it crashes safari 4            
-        isWebkit = navigator.userAgent.indexOf("AppleWebKit") > -1;                        
-
-      // dt.effectAllowed is none in Safari 5
-      // dt.types.contains check is for firefox            
-      return dt && dt.effectAllowed != 'none' && 
-        (dt.files || (!isWebkit && dt.types.contains && dt.types.contains('Files')));
-    }
     
-    $('#toMail').tagsInput({'width':'475px','height':'50px','defaultText':'Les emails destinaires'});     
-
     var uploader = new plupload.Uploader({
       runtimes : 'html5,flash',
       flash_swf_url : '{{ asset('/bundles/sbsendbox/js/plupload.flash.swf') }}',
       browse_button : 'pickfiles',
-      drop_element : 'dropdown',
       container: 'uploader',
       max_file_size : '1gb',
       chunk_size : '5mb',
@@ -81,24 +65,24 @@
 
     uploader.bind('Init', function(up, params) {
       $('#pickfiles').html("");
-      $('#pickfiles').append('<button>Cliquez pour t&eacute;l&eacute;charger des fichiers</button>')
+      $('#pickfiles').append('<em style="text-align:center">Cliquez ici pour t&eacute;l&eacute;charger des fichiers</em>')
     });
 
     uploader.bind('FilesAdded', function(up, files) {
       for (var i in files) {
-        $('#pickfiles').append('<span id="' + files[i].id + '" class="tag btn"><span>' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <img src="" /></span></span>');
+        $('#pickfiles').append('<span id="' + files[i].id + '" class="btn"><span>' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <img src="" /></span></span>');
       }
     });
 
     uploader.bind('UploadProgress', function(up, file) {
       //$('#'+file.id).css('background-color', 'rgb('+(247-file.percent*156/100)+', '+(197-file.percent*13/100)+', '+(25+file.percent*66/100)+')');
       $('#'+file.id).css('border-color', 'rgba('+(197-file.percent*156/100)+', '+(147-file.percent*13/100)+', '+(25+file.percent*66/100)+', 0.5)');
-      $('#progress .qq-upload-size').css('width', up.total.percent+'%');
+      $('#progress .upload-size').css('width', up.total.percent+'%');
     });
 
     uploader.bind('QueueChanged', function(up) {
       $('#progress').css('display', 'block');
-      $('#pickfiles button').hide();
+      $('#pickfiles em').hide();
       up.start();
       return false;
     });
@@ -121,37 +105,82 @@
 
     uploader.init();
     
-    $("#validCaptcha").click(function() {
-        $("#recaptcha-container").hide();
-        $("#upload_form").show();
-    });
-
-    $('#uploader').bind('dragenter', function(e) {
-      if (!isValidFileDrag(e)) return;
-      $('#dropdown').show();
-    });
-
-    $('#uploader').bind('dragleave', function(e) {
-      if (!isValidFileDrag(e)) return;
-      $('#dropdown').hide();
-    });
-
     $("#sendMail").click(function() {
       $.ajax({
         type: "post",
         url: "{{ path('send') }}",
         data: $('form').serialize(),
         success: function(msg){
-          if(msg=="SUCCESS")
-            $('.publish').html('Votre message a été correctement envoyé');
-          else
-            $('.publish').html(msg);
+          var alert = document.createElement('div');
+          var button = document.createElement('button');
+          button.type = "button";
+          $(button).attr('data-dismiss', 'alert');
+          $(button).addClass('close');
+          $(button).text('x');
+          $(alert).addClass('alert');
+          $(alert).html(button);
+          if(msg=="SUCCESS") {
+            $(alert).addClass('alert-success');
+            $(alert).append('Votre message a été correctement envoyé.');
+          }
+          else {
+            $(alert).addClass('alert-error');
+            $(alert).append(msg);
+          }
+          $('#result').append(alert);
         }
       });
       return false;
     });
 
-    $('#pickfiles,#destMail').popover();
+    loadFromStorage();
 
-   </script>
+    $('#toMail').chosen({
+      create_option: function(term) {
+        var chosen = this;
+        $.post("{{ path('validate') }}", {email: term}, function(data) {
+          if (data.status == 'success') {
+            addToStorage(data.value);
+            chosen.append_option({
+              value: data.value,
+              text: data.value
+            });
+          }
+        }, 'json');
+      },
+      persistent_create_option: true
+    });
+
+    function addToStorage(term)
+    {
+      var stored = localStorage.getItem('fiftysent');
+      if (stored != null) {
+        stored = stored.split(',');
+        stored.push(term);
+      }
+      else {
+        stored = [term];
+      }
+      localStorage.setItem('fiftysent', stored);
+    }
+
+    function loadFromStorage()
+    {
+      var stored = localStorage.getItem('fiftysent');
+      if (stored != null) {
+        stored = stored.split(',');
+      }
+      else {
+        stored = [];
+      }
+      var options = [];
+      for (i in stored) {
+        var opt = document.createElement('option');
+        opt.text = stored[i];
+        opt.value = stored[i];
+        options.push(opt);
+      }
+      $('#toMail').append(options);
+    }
+</script>
 {% endblock %}

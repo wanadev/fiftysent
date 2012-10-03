@@ -9,7 +9,7 @@ Récupérer les sources
 Paramétrages de base
 --------------------
 
-    mv app/config/parameters.ini.example app/config/parameters.ini
+    mv app/config/parameters.yml.example app/config/parameters.yml
 
 Adaptez la configuration à vos besoins.
 

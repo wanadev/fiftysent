@@ -8,17 +8,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Sb\SendboxBundle\Uploader\SbUploader;
-use Sb\SendboxBundle\Form\MediaType;
 use ZipArchive;
+use Sb\SendboxBundle\Entity\DestEmail;
+use Swift_Message;
+use SimpleXMLElement;
 
 class IndexController extends Controller
 {
   public function indexAction()
   {
     $this->get('session')->set('token',$this->generateToken());
-    $container = $this->container;
-    $form = $this->createForm(new MediaType());
-    return $this->container->get('templating')->renderResponse('SbSendboxBundle:Index:index.html.twig',array('form' => $form->createView()));
+    return $this->container->get('templating')->renderResponse('SbSendboxBundle:Index:index.html.twig');
   }
   
   public function uploadAction(Request $request)
@@ -41,7 +41,7 @@ class IndexController extends Controller
           $newsXML = simplexml_load_file($path.$token.'.xml');
         }
         else {
-          $newsXML = new \SimpleXMLElement("<upload></upload>");
+          $newsXML = new SimpleXMLElement("<upload></upload>");
           $newsXML->addAttribute('token', $token);
         }
         $newsIntro = $newsXML->addChild('file',$result['filename']);
@@ -58,33 +58,44 @@ class IndexController extends Controller
   
   public function sendAction(Request $request)
   {
-    /*@TODO Récupérer le XML (token), le valider et faire un zip si éléments >0*/
-    $token = $this->get('session')->get('token');
-    $newsXML = simplexml_load_file($this->getPathByToken($token).$token.'.xml');
-    $size = 0;
-    foreach($newsXML->file as $f):
-      $files[] = array('name' => "$f", "size" => $this->returnFileSize($f->attributes()->size));
-      $size += $f->attributes()->size;
-    endforeach;
+    $email = $request->get('fromMail');
+    $de = new DestEmail();
+    $de->setEmail($email);
 
-    $toMail = $request->get('toMail');
-    $toMail = explode(',', $toMail);
-    $message = \Swift_Message::newInstance()
-    ->setSubject('Invitation à télécharger des fichiers')
-    ->setFrom($request->get('fromMail'))
-    ->setTo($toMail)
-    ->setBody($this->renderView('SbSendboxBundle:Index:send.html.twig', array('token' =>$token, 'files' => $files, 'size' => $this->returnFileSize($size))), 'text/html');
-    $this->get('mailer')->send($message);
-    $this->get('session')->set('token', $this->generateToken());
-    return new Response('SUCCESS');
+    $validator = $this->get('validator');
+    $errors = $validator->validate($de);
+
+    if (count($errors) > 0) {
+        return new Response("L'email de l'emmetteur est invalide.");
+    } else {
+      $token = $this->get('session')->get('token');
+      $newsXML = simplexml_load_file($this->getPathByToken($token).$token.'.xml');
+      $size = 0;
+      foreach($newsXML->file as $f) {
+        $files[] = array('name' => "$f", "size" => $this->returnFileSize($f->attributes()->size));
+        $size += $f->attributes()->size;
+      }
+
+      $toMail = $request->get('toMail');
+      $toMail = explode(',', $toMail);
+      $message = Swift_Message::newInstance()
+      ->setSubject('Invitation à télécharger des fichiers')
+      ->setFrom($email)
+      ->setTo($toMail)
+      ->setBody($this->renderView('SbSendboxBundle:Index:send.html.twig', array('token' =>$token, 'files' => $files, 'size' => $this->returnFileSize($size))), 'text/html');
+      $this->get('mailer')->send($message);
+      $this->get('session')->set('token', $this->generateToken());
+
+      return new Response('SUCCESS');
+    }
   }
 
   public function downloadAction(Request $request, $token)
   {
     $newsXML = simplexml_load_file($this->getPathByToken($token).$token.'.xml');
-    foreach($newsXML->file as $f):
+    foreach($newsXML->file as $f) {
       $files[] = array('name' => "$f", "size" => $this->returnFileSize($f->attributes()->size));
-    endforeach;
+    }
     return $this->container->get('templating')->renderResponse('SbSendboxBundle:Index:download.html.twig', array('token' => $token, 'files' => $files));
   }
 
@@ -92,9 +103,9 @@ class IndexController extends Controller
   {
     $newsXML = simplexml_load_file($this->getPathByToken($token).$token.'.xml');
     $files = array();
-    foreach($newsXML->file as $f):
+    foreach($newsXML->file as $f) {
       $files[] = array('name' => "$f", 'path' => $this->getPathByToken($token).$f);
-    endforeach;
+    }
 
     if (count($files) > 1) {
       $path = $this->getPathByToken($token);
@@ -121,6 +132,22 @@ class IndexController extends Controller
     }
 
     return new Response(htmlspecialchars(json_encode($return), ENT_NOQUOTES));
+  }
+
+  public function validateAction(Request $request)
+  {
+    $email = $request->get('email');
+    $de = new DestEmail();
+    $de->setEmail($email);
+
+    $validator = $this->get('validator');
+    $errors = $validator->validate($de);
+
+    if (count($errors) > 0) {
+        return new Response(json_encode(array('status' => 'failure')));
+    } else {
+        return new Response(json_encode(array('status' => 'success', 'value' => $email)));
+    }
   }
   
   public function getPathByToken($token)

@@ -2,11 +2,12 @@ body, input, label {
   font-family: 'Droid Sans', sans-serif !important;
 }
 
-.qq-uploader { position:relative; width: 100%;}
+body {
+  background-image: url('/bundles/sbsendbox/images/bg.png');
+}
 
 #uploader{
   margin-bottom: 20px;
-  text-align: center;
   position:relative;
 }
 
@@ -24,7 +25,7 @@ body, input, label {
 }
 
 #progress {
-  width: 418px;
+  width: 100%;
   margin:0 auto;
   margin-top: 15px;
   padding: 1px;
@@ -46,70 +47,50 @@ body, input, label {
   text-align: center;
 }
 
-#dropdown {
-  display:none;
-  position: absolute;
-  width:488px;
-  height:67px;
-  border: 1px solid #E8E8E8;
-  top: 0;
-  background:white;
-  text-align: center;
-  line-height: 5;
-}
+.upload-size {background: #F7C519; height: 15px;  width: 0px;}
 
-.qq-upload-drop-area {
-    position:absolute; top:0; left:0; width:100%; height:100%; min-height: 70px; z-index:2;
-    background:#FAFAFA; text-align:center; 
-}
-.qq-upload-drop-area span {
-    display:block; position:absolute; top: 50%; width:100%; margin-top:-8px; font-size:16px;
-}
-.qq-upload-drop-area-active {background:#EEB838;}
-
-.qq-upload-list {margin:10px 35px; padding:0; list-style:disc;}
-
-.qq-upload-list img{width:200px;height:25px;}
-.qq-upload-list li { margin:10px; line-height:15px; font-size:12px;width: 400px;}
-
-.qq-upload-list li img {
-  vertical-align: middle;
-}
-
-.qq-upload-file {display:none;}
-.qq-upload-spinner {display:none; background: url("loading.gif"); width:15px; height:15px; vertical-align:text-bottom;}
-.qq-upload-size,.qq-upload-cancel {font-size:11px; background: #F7C519; display: block; height: 15px;  width: 0px;}
-
-.qq-upload-failed-text {display:none;}
-.qq-upload-fail .qq-upload-failed-text {display:inline;}
-
-span.tag img {
-  vertical-align: middle;
-  position: absolute;
-  right: 4px;
-  top: 3px;
-}
-
-span.tag i {
-  position: absolute;
-  right: 4px;
-  top: 3px;
-}
-
-#pickfiles span.tag {
-  width: 213px;
-  height: 13px;
-  position: relative;
-  overflow: hidden;
-  text-align: left;
-}
-
-#pickfiles span.tag span {
-  width: 199px;
-  overflow: hidden;
-  display: inline-block;
+#pickfiles {
+  height: 100px;
+  margin-left:0;
+  width:100%
 }
 
 #pickfiles:hover {
   cursor: pointer;
+}
+
+#pickfiles .btn {
+  margin: 2px;
+}
+
+.publish {
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #e8e8e8;
+}
+
+#mailer {
+  border-top:1px solid #E8E8E8;
+  padding-top:10px;
+}
+
+.file-list {
+  width:100%;
+  height:250px;
+  margin:auto;
+  margin-bottom: 20px;
+  overflow-y:auto;
+  overflow-x:hidden
+}
+
+#footer {
+  text-align: center;
+  border-top: 1px solid #e8e8e8;
+  background-color: white;
+  padding: 5px;
+  position: fixed;
+}
+
+#result {
+  margin-top: 5px;
 }
