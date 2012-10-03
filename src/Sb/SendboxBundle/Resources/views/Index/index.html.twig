@@ -36,7 +36,6 @@
       <input type="text" title="Votre email" name="fromMail" id="fromMail" rel="empty" value="Votre email" />
       <select data-placeholder="Liste des destinataires..." multiple="multiple" id="toMail" name="toMail" style="width:100%"></select><br />
       <button id="sendMail" class="btn btn-success disabled right" disabled="disabled">Envoyer <i class="icon-envelope icon-white"></i></button>
-      <div class="clear"></div>
     </div>
   </form>
 </div>
@@ -120,7 +119,7 @@
     });
 
     loadFromStorage();
-    
+
     $('#toMail').chosen({
       create_option: function(term) {
         var chosen = this;
