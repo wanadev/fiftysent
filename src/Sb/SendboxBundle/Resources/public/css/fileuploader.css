@@ -90,3 +90,7 @@ body {
   padding: 5px;
   position: fixed;
 }
+
+#result {
+  margin-top: 5px;
+}
