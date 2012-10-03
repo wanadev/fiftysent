@@ -132,9 +132,9 @@ class IndexController extends Controller
     $errors = $validator->validate($author);
 
     if (count($errors) > 0) {
-        return new Response(htmlspecialchars(json_encode(array('status' => 'failure', 'value' => $errors), ENT_NOQUOTES));
+        return new Response(htmlspecialchars(json_encode(array('status' => 'failure', 'value' => $errors), ENT_NOQUOTES)));
     } else {
-        return new Response(htmlspecialchars(json_encode(array('status' => 'success', 'value' => $email), ENT_NOQUOTES));
+        return new Response(htmlspecialchars(json_encode(array('status' => 'success', 'value' => $email), ENT_NOQUOTES)));
     }
   }
   
