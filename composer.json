@@ -6,7 +6,7 @@
 
         "symfony/assetic-bundle":         "2.1.0",
         "sensio/generator-bundle":        "2.1.0",
-        "sensio/framework-extra-bundle":  "*",
+        "sensio/framework-extra-bundle":  "2.1.0",
         "sensio/distribution-bundle":     "*",
         "jms/security-extra-bundle":      "*",
         "symfony/swiftmailer-bundle":     "*",
