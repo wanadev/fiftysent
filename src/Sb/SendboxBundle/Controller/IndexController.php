@@ -84,7 +84,7 @@ class IndexController extends Controller
       ->setBody($this->renderView('SbSendboxBundle:Index:send.html.twig', array('token' =>$token, 'files' => $files, 'size' => $this->returnFileSize($size))), 'text/html');
       $this->get('mailer')->send($message);
       $this->get('session')->set('token', $this->generateToken());
-      
+
       return new Response('SUCCESS');
     }
   }
@@ -92,9 +92,9 @@ class IndexController extends Controller
   public function downloadAction(Request $request, $token)
   {
     $newsXML = simplexml_load_file($this->getPathByToken($token).$token.'.xml');
-    foreach($newsXML->file as $f):
+    foreach($newsXML->file as $f) {
       $files[] = array('name' => "$f", "size" => $this->returnFileSize($f->attributes()->size));
-    endforeach;
+    }
     return $this->container->get('templating')->renderResponse('SbSendboxBundle:Index:download.html.twig', array('token' => $token, 'files' => $files));
   }
 
