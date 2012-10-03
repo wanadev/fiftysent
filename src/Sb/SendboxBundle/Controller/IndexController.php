@@ -66,7 +66,7 @@ class IndexController extends Controller
     $errors = $validator->validate($de);
 
     if (count($errors) > 0) {
-        return new Response('FAILURE');
+        return new Response("L'email de l'emmetteur est invalide.");
     } else {
       $token = $this->get('session')->get('token');
       $newsXML = simplexml_load_file($this->getPathByToken($token).$token.'.xml');
