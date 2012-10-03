@@ -57,25 +57,36 @@ class IndexController extends Controller
   
   public function sendAction(Request $request)
   {
-    /*@TODO Récupérer le XML (token), le valider et faire un zip si éléments >0*/
-    $token = $this->get('session')->get('token');
-    $newsXML = simplexml_load_file($this->getPathByToken($token).$token.'.xml');
-    $size = 0;
-    foreach($newsXML->file as $f):
-      $files[] = array('name' => "$f", "size" => $this->returnFileSize($f->attributes()->size));
-      $size += $f->attributes()->size;
-    endforeach;
+    $email = $request->get('fromMail');
+    $de = new DestEmail();
+    $de->setEmail($email);
 
-    $toMail = $request->get('toMail');
-    $toMail = explode(',', $toMail);
-    $message = \Swift_Message::newInstance()
-    ->setSubject('Invitation à télécharger des fichiers')
-    ->setFrom($request->get('fromMail'))
-    ->setTo($toMail)
-    ->setBody($this->renderView('SbSendboxBundle:Index:send.html.twig', array('token' =>$token, 'files' => $files, 'size' => $this->returnFileSize($size))), 'text/html');
-    $this->get('mailer')->send($message);
-    $this->get('session')->set('token', $this->generateToken());
-    return new Response('SUCCESS');
+    $validator = $this->get('validator');
+    $errors = $validator->validate($de);
+
+    if (count($errors) > 0) {
+        return new Response('FAILURE');
+    } else {
+      $token = $this->get('session')->get('token');
+      $newsXML = simplexml_load_file($this->getPathByToken($token).$token.'.xml');
+      $size = 0;
+      foreach($newsXML->file as $f) {
+        $files[] = array('name' => "$f", "size" => $this->returnFileSize($f->attributes()->size));
+        $size += $f->attributes()->size;
+      }
+
+      $toMail = $request->get('toMail');
+      $toMail = explode(',', $toMail);
+      $message = \Swift_Message::newInstance()
+      ->setSubject('Invitation à télécharger des fichiers')
+      ->setFrom($email)
+      ->setTo($toMail)
+      ->setBody($this->renderView('SbSendboxBundle:Index:send.html.twig', array('token' =>$token, 'files' => $files, 'size' => $this->returnFileSize($size))), 'text/html');
+      $this->get('mailer')->send($message);
+      $this->get('session')->set('token', $this->generateToken());
+      
+      return new Response('SUCCESS');
+    }
   }
 
   public function downloadAction(Request $request, $token)
