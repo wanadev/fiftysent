@@ -18,7 +18,6 @@ class IndexController extends Controller
   public function indexAction()
   {
     $this->get('session')->set('token',$this->generateToken());
-    $container = $this->container;
     return $this->container->get('templating')->renderResponse('SbSendboxBundle:Index:index.html.twig');
   }
   
