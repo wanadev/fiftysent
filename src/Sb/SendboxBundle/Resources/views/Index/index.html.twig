@@ -135,15 +135,25 @@
     function addToStorage(term)
     {
       var stored = localStorage.getItem('fiftysent');
-      stored = stored.split(',');
-      stored.push(term);
+      if (typeof stored != 'undefined') {
+        stored = stored.split(',');
+        stored.push(term);
+      }
+      else {
+        stored = [term];
+      }
       localStorage.setItem('fiftysent', stored);
     }
 
     function loadFromStorage()
     {
       var stored = localStorage.getItem('fiftysent');
-      stored = stored.split(',');
+      if (typeof stored != 'undefined') {
+        stored = stored.split(',');
+      }
+      else {
+        stored = [];
+      }
       var options = [];
       for (i in stored) {
         var opt = document.createElement('option');
@@ -153,6 +163,5 @@
       }
       $('#toMail').append(options);
     }
-
    </script>
 {% endblock %}
