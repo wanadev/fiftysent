@@ -125,11 +125,13 @@
       create_option: function(term) {
         var chosen = this;
         $.post("{{ path('validate') }}", {email: term}, function(data) {
-          addToStorage(data);
-          chosen.append_option({
-            value: data,
-            text: data
-          });
+          if (data.status == 'success') {
+            addToStorage(data.value);
+            chosen.append_option({
+              value: data.value,
+              text: data.value
+            });
+          }
         }, 'json');
       },
       persistent_create_option: true

@@ -129,12 +129,12 @@ class IndexController extends Controller
     $de->setEmail($email);
 
     $validator = $this->get('validator');
-    $errors = $validator->validate($author);
+    $errors = $validator->validate($de);
 
     if (count($errors) > 0) {
-        return new Response(htmlspecialchars(json_encode(array('status' => 'failure', 'value' => $errors), ENT_NOQUOTES)));
+        return new Response(json_encode(array('status' => 'failure')));
     } else {
-        return new Response(htmlspecialchars(json_encode(array('status' => 'success', 'value' => $email), ENT_NOQUOTES)));
+        return new Response(json_encode(array('status' => 'success', 'value' => $email)));
     }
   }
   
