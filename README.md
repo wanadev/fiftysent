@@ -35,3 +35,4 @@ Ready!
 
 * [Installation de ZipArchive](https://github.com/wanadev/fiftysent/wiki/Installation-de-ZipArchive)
 * [Comment contribuer](https://github.com/wanadev/fiftysent/wiki/Comment-contribuer)
+* [Versions](https://github.com/wanadev/fiftysent/wiki/Versions)
