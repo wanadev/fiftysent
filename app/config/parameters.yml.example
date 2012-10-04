@@ -1,6 +1,6 @@
 parameters:
     locale:             fr
-    secret:             "f3h=98|GWnDK52u|0mo2^QpkdfUVO*Tqy("
+    secret:             ThisIsNotSecretToken
     mailer_transport:   smtp
     mailer_host:        localhost
     mailer_user:        user
