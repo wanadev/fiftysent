@@ -24,16 +24,19 @@ class SbUploader
     $fileName = isset($_REQUEST["name"]) ? $_REQUEST["name"] : '';
     $this->fileName = preg_replace('/[^\w\._]+/', '_', $fileName);
 
-    if (!file_exists($this->targetDir))
+    if (!file_exists($this->targetDir)) {
       @mkdir($this->targetDir, 0777, true);
+    }
 
     $this->filePath = $this->targetDir . DIRECTORY_SEPARATOR . $this->fileName;
 
-    if (isset($_SERVER["HTTP_CONTENT_TYPE"]))
+    if (isset($_SERVER["HTTP_CONTENT_TYPE"])) {
       $this->contentType = $_SERVER["HTTP_CONTENT_TYPE"];
+    }
 
-    if (isset($_SERVER["CONTENT_TYPE"]))
+    if (isset($_SERVER["CONTENT_TYPE"])) {
       $this->contentType = $_SERVER["CONTENT_TYPE"];
+    }
 
     $this->checkServerSettings();
   }
@@ -67,8 +70,9 @@ class SbUploader
       $fileName_b = substr($this->fileName, $ext);
 
       $count = 1;
-      while (file_exists($this->targetDir . DIRECTORY_SEPARATOR . $fileName_a . '_' . $count . $fileName_b))
+      while (file_exists($this->targetDir . DIRECTORY_SEPARATOR . $fileName_a . '_' . $count . $fileName_b)) {
         $count++;
+      }
 
       $this->fileName = $fileName_a . '_' . $count . $fileName_b;
     }
@@ -89,8 +93,9 @@ class SbUploader
       closedir($dir);
 
       return false;
-    } else
+    } else {
       return '{"jsonrpc" : "2.0", "error" : {"code": 100, "message": "Failed to open temp directory."}, "id" : "id"}';
+    }
   }
 
   public function save()
@@ -111,10 +116,12 @@ class SbUploader
           $in = fopen($_FILES['file']['tmp_name'], "rb");
 
           if ($in) {
-            while ($buff = fread($in, 4096))
+            while ($buff = fread($in, 4096)) {
               fwrite($out, $buff);
-          } else
+            }
+          } else {
             $result = '{"jsonrpc" : "2.0", "error" : {"code": 101, "message": "Failed to open input stream."}, "id" : "id"}';
+          }
           fclose($in);
           fclose($out);
           @unlink($_FILES['file']['tmp_name']);
@@ -130,15 +137,17 @@ class SbUploader
         $in = fopen("php://input", "rb");
 
         if ($in) {
-          while ($buff = fread($in, 4096))
+          while ($buff = fread($in, 4096)) {
             fwrite($out, $buff);
+          }
         } else
           $result = '{"jsonrpc" : "2.0", "error" : {"code": 101, "message": "Failed to open input stream."}, "id" : "id"}';
 
         fclose($in);
         fclose($out);
-      } else
+      } else {
         $result = '{"jsonrpc" : "2.0", "error" : {"code": 102, "message": "Failed to open output stream."}, "id" : "id"}';
+      }
     }
 
     // Check if file has been uploaded
