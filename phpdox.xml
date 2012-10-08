@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpdox xmlns="http://phpdox.de/config">
-    <project name="FiftySent" source="lib" workdir="build/phpdox">
+    <project name="FiftySent" source="src" workdir="build/phpdox">
         <collector publiconly="false">
             <include mask="*.php" />
         </collector>
