@@ -43,17 +43,16 @@
 <pre><code>mv app/config/parameters.yml.example app/config/parameters.yml
 </code></pre>
 
-<p>Adaptez la configuration à vos besoins.</p>
+<h2>Récupérer Composer</h2>
 
-<pre><code>mkdir app/cache app/logs
-chmod 777 app/cache app/logs
+<pre><code>$ curl -s https://getcomposer.org/installer | php
 </code></pre>
 
 <h2>Installation des vendors</h2>
 
-<p>Vérifiez que l'extension <em>phar.so</em> et <em>zip.so</em> sont activées dans votre <em>php.ini</em>.</p>
+<p>Vérifiez que l'extension <code>phar.so</code> et <code>zip.so</code> sont activées dans votre <code>php.ini</code>.</p>
 
-<pre><code>php bin/vendors install
+<pre><code>php composer.phar install
 </code></pre>
 
 <h2>Création du répertoire d'upload</h2>
