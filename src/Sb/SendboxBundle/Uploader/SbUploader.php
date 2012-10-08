@@ -119,8 +119,9 @@ class SbUploader
             while ($buff = fread($in, 4096)) {
               fwrite($out, $buff);
             }
-          } else
+          } else {
             $result = '{"jsonrpc" : "2.0", "error" : {"code": 101, "message": "Failed to open input stream."}, "id" : "id"}';
+          }
           fclose($in);
           fclose($out);
           @unlink($_FILES['file']['tmp_name']);
@@ -136,8 +137,9 @@ class SbUploader
         $in = fopen("php://input", "rb");
 
         if ($in) {
-          while ($buff = fread($in, 4096))
+          while ($buff = fread($in, 4096)) {
             fwrite($out, $buff);
+          }
         } else
           $result = '{"jsonrpc" : "2.0", "error" : {"code": 101, "message": "Failed to open input stream."}, "id" : "id"}';
 
