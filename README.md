@@ -11,17 +11,17 @@ Paramétrages de base
 
     mv app/config/parameters.yml.example app/config/parameters.yml
 
-Adaptez la configuration à vos besoins.
+Récupérer Composer
+------------------
 
-    mkdir app/cache app/logs
-    chmod 777 app/cache app/logs
+    $ curl -s https://getcomposer.org/installer | php
 
 Installation des vendors
 ------------------------
 
 Vérifiez que l'extension _phar.so_ et _zip.so_ sont activées dans votre _php.ini_.
 
-    php bin/vendors install
+    php composer.phar install
 
 Création du répertoire d'upload
 -------------------------------
