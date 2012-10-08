@@ -4,7 +4,6 @@ namespace Sb\SendboxBundle\Uploader;
 
 class SbUploader
 {
-  private $file;
   private $sizeLimit;
   private $targetDir;
   private $cleanupTargetDir = true;
@@ -41,7 +40,8 @@ class SbUploader
     $this->checkServerSettings();
   }
 
-  private function checkServerSettings(){        
+  private function checkServerSettings()
+  {        
     $postSize = $this->toBytes(ini_get('post_max_size'));
     $uploadSize = $this->toBytes(ini_get('upload_max_filesize'));        
     
@@ -51,7 +51,8 @@ class SbUploader
     }        
   }
 
-  private function toBytes($str){
+  private function toBytes($str)
+  {
     $val = trim($str);
     $last = strtolower($str[strlen($str)-1]);
     switch($last) {
@@ -66,15 +67,15 @@ class SbUploader
   {
     if ($this->chunks < 2 && file_exists($this->targetDir . DIRECTORY_SEPARATOR . $this->fileName)) {
       $ext = strrpos($this->fileName, '.');
-      $fileName_a = substr($this->fileName, 0, $ext);
-      $fileName_b = substr($this->fileName, $ext);
+      $fileNameA = substr($this->fileName, 0, $ext);
+      $fileNameB = substr($this->fileName, $ext);
 
       $count = 1;
-      while (file_exists($this->targetDir . DIRECTORY_SEPARATOR . $fileName_a . '_' . $count . $fileName_b)) {
+      while (file_exists($this->targetDir . DIRECTORY_SEPARATOR . $fileNameA . '_' . $count . $fileNameB)) {
         $count++;
       }
 
-      $this->fileName = $fileName_a . '_' . $count . $fileName_b;
+      $this->fileName = $fileNameA . '_' . $count . $fileNameB;
     }
   }
 
@@ -125,10 +126,12 @@ class SbUploader
           fclose($in);
           fclose($out);
           @unlink($_FILES['file']['tmp_name']);
-        } else
+        } else {
           $result = '{"jsonrpc" : "2.0", "error" : {"code": 102, "message": "Failed to open output stream."}, "id" : "id"}';
-      } else
+        }
+      } else {
         $result = '{"jsonrpc" : "2.0", "error" : {"code": 103, "message": "Failed to move uploaded file."}, "id" : "id"}';
+      }
     } else {
       // Open temp file
       $out = fopen("{$this->filePath}.part", $this->chunk == 0 ? "wb" : "ab");
