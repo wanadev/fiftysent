@@ -1,3 +1,5 @@
+[![Build Status](http://jenkins.wanadev.org/job/FiftySent/badge/icon)](http://jenkins.wanadev.org/job/FiftySent/)
+
 Installation de FiftySent
 =========================
 
