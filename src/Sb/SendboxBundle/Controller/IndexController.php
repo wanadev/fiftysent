@@ -35,8 +35,7 @@ class IndexController extends Controller
     if(array_key_exists('success', $result) && $result['success'] == true) {
       if(file_exists($path.$token.'.xml')) {
         $newsXML = simplexml_load_file($path.$token.'.xml');
-      }
-      else {
+      } else {
         $newsXML = new SimpleXMLElement("<upload></upload>");
         $newsXML->addAttribute('token', $token);
       }
@@ -59,8 +58,7 @@ class IndexController extends Controller
 
     if (count($errors) > 0) {
         return new Response("L'email de l'emmetteur est invalide.");
-    }
-    else {
+    } else {
       $token = $this->get('session')->get('token');
       $newsXML = simplexml_load_file($this->getPathByToken($token).$token.'.xml');
       $size = 0;
@@ -115,12 +113,10 @@ class IndexController extends Controller
           $zip->close();
           $return = array('name' => 'sendbox-files-'.$token.'.zip', 'path' => $this->getUrlByToken($token).'sendbox-files-'.$token.'.zip');
         }
-      }
-      else {
+      } else {
         $return = array('name' => 'sendbox-files-'.$token.'.zip', 'path' => $this->getUrlByToken($token).'sendbox-files-'.$token.'.zip');
       }
-    }
-    else {
+    } else {
       $return = array('name' => $files[0]['name'], 'path' => $this->getUrlByToken($token).$files[0]['name']);
     }
 
@@ -138,8 +134,7 @@ class IndexController extends Controller
 
     if (count($errors) > 0) {
         return new Response(json_encode(array('status' => 'failure')));
-    }
-    else {
+    } else {
         return new Response(json_encode(array('status' => 'success', 'value' => $email)));
     }
   }
