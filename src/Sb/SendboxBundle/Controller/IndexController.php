@@ -96,7 +96,7 @@ class IndexController extends Controller
   {
     $newsXML = simplexml_load_file($this->getPathByToken($token).$token.'.xml');
     $files = array();
-    foreach($newsXML->file as $f) {
+    foreach ($newsXML->file as $f) {
       $files[] = array('name' => "$f", 'path' => $this->getPathByToken($token).$f);
     }
 
