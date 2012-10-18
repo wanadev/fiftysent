@@ -143,8 +143,9 @@ class SbUploader
           while ($buff = fread($in, 4096)) {
             fwrite($out, $buff);
           }
-        } else
+        } else {
           $result = '{"jsonrpc" : "2.0", "error" : {"code": 101, "message": "Failed to open input stream."}, "id" : "id"}';
+        }
 
         fclose($in);
         fclose($out);

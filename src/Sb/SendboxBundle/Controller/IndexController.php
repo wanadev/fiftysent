@@ -17,43 +17,34 @@ class IndexController extends Controller
 {
   public function indexAction()
   {
-    $this->get('session')->set('token',$this->generateToken());
+    $this->get('session')->set('token', $this->generateToken());
     return $this->container->get('templating')->renderResponse('SbSendboxBundle:Index:index.html.twig');
   }
   
   public function uploadAction(Request $request)
   {
-    // if ($request->isXmlHttpRequest()) {
-      $token =  $this->get('session')->get('token');
-      $this->get('session')->set('token', $token);
-      $allowedExtensions = array();
-      $sizeLimit = 10 * 1024 * 1024;
-      $path =  $this->getPathByToken($token);
-      $uploader = new SbUploader($sizeLimit, $path);
-      $uploader->isUnique();
-      $result = $uploader->save();
-      $result = json_decode($result, true);
+    $token =  $this->get('session')->get('token');
+    $this->get('session')->set('token', $token);
+    $sizeLimit = 10 * 1024 * 1024;
+    $path =  $this->getPathByToken($token);
+    $uploader = new SbUploader($sizeLimit, $path);
+    $uploader->isUnique();
+    $result = $uploader->save();
+    $result = json_decode($result, true);
 
-      if(array_key_exists('success', $result) && $result['success']==true)
-      {
-        if(file_exists($path.$token.'.xml'))
-        {
-          $newsXML = simplexml_load_file($path.$token.'.xml');
-        }
-        else {
-          $newsXML = new SimpleXMLElement("<upload></upload>");
-          $newsXML->addAttribute('token', $token);
-        }
-        $newsIntro = $newsXML->addChild('file',$result['filename']);
-        $newsIntro->addAttribute('size', filesize($path.$result['filename']));
-        $newsXML->saveXML($path.$token.'.xml');
+    if (array_key_exists('success', $result) && $result['success'] == true) {
+      if (file_exists($path.$token.'.xml')) {
+        $newsXML = simplexml_load_file($path.$token.'.xml');
+      } else {
+        $newsXML = new SimpleXMLElement("<upload></upload>");
+        $newsXML->addAttribute('token', $token);
       }
+      $newsIntro = $newsXML->addChild('file', $result['filename']);
+      $newsIntro->addAttribute('size', filesize($path.$result['filename']));
+      $newsXML->saveXML($path.$token.'.xml');
+    }
 
-      return new Response(htmlspecialchars(json_encode($result), ENT_NOQUOTES));
-    // }
-    // else {
-    //   return new Response(htmlspecialchars('{"jsonrpc" : "2.0", "error" : {"code": 104, "message": "Hacking attempt."}, "id" : "id"}', ENT_NOQUOTES));
-    // }
+    return new Response(htmlspecialchars(json_encode($result), ENT_NOQUOTES));
   }
   
   public function sendAction(Request $request)
@@ -71,7 +62,7 @@ class IndexController extends Controller
       $token = $this->get('session')->get('token');
       $newsXML = simplexml_load_file($this->getPathByToken($token).$token.'.xml');
       $size = 0;
-      foreach($newsXML->file as $f) {
+      foreach ($newsXML->file as $f) {
         $files[] = array('name' => "$f", "size" => $this->returnFileSize($f->attributes()->size));
         $size += $f->attributes()->size;
       }
@@ -93,7 +84,7 @@ class IndexController extends Controller
   public function downloadAction(Request $request, $token)
   {
     $newsXML = simplexml_load_file($this->getPathByToken($token).$token.'.xml');
-    foreach($newsXML->file as $f) {
+    foreach ($newsXML->file as $f) {
       $files[] = array('name' => "$f", "size" => $this->returnFileSize($f->attributes()->size));
     }
     return $this->container->get('templating')->renderResponse('SbSendboxBundle:Index:download.html.twig', array('token' => $token, 'files' => $files));
@@ -103,7 +94,7 @@ class IndexController extends Controller
   {
     $newsXML = simplexml_load_file($this->getPathByToken($token).$token.'.xml');
     $files = array();
-    foreach($newsXML->file as $f) {
+    foreach ($newsXML->file as $f) {
       $files[] = array('name' => "$f", 'path' => $this->getPathByToken($token).$f);
     }
 
@@ -122,12 +113,10 @@ class IndexController extends Controller
           $zip->close();
           $return = array('name' => 'sendbox-files-'.$token.'.zip', 'path' => $this->getUrlByToken($token).'sendbox-files-'.$token.'.zip');
         }
-      }
-      else {
+      } else {
         $return = array('name' => 'sendbox-files-'.$token.'.zip', 'path' => $this->getUrlByToken($token).'sendbox-files-'.$token.'.zip');
       }
-    }
-    else {
+    } else {
       $return = array('name' => $files[0]['name'], 'path' => $this->getUrlByToken($token).$files[0]['name']);
     }
 
@@ -154,7 +143,7 @@ class IndexController extends Controller
   {
     $md5 = str_split($token);
     $path = implode('/', $md5);
-    return $_SERVER['DOCUMENT_ROOT'].'/uploads/'.date('Y').'/'.date('m').'/'.$path.'/';
+    return $this->get('request')->server->get('DOCUMENT_ROOT').'/uploads/'.date('Y').'/'.date('m').'/'.$path.'/';
   }
   
   public function getUrlByToken($token)
@@ -169,15 +158,16 @@ class IndexController extends Controller
     $chars = 'azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN1234567890';
     $retour = '';
 
-    for ($i=0;$i<$size;$i++) {
+    for ($i=0; $i<$size; $i++) {
       $retour .= $chars[rand(0, 35)];
     }
 
     return $retour;
   }
 
-  private function returnFileSize($fileSize) {
-    switch ($fileSize) :
+  private function returnFileSize($fileSize)
+  {
+    switch ($fileSize) {
       case ($fileSize < 1024):
           return $fileSize.' B';
       case ($fileSize > 1024 && $fileSize < 1048576):
@@ -192,6 +182,6 @@ class IndexController extends Controller
           return round($fileSize/1125899906842624, 1).' PB';
       default:
           return $fileSize;
-    endswitch;
+    }
   }
 }

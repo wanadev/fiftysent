@@ -40,17 +40,13 @@ class SbSendboxExtension extends Extension
      */
     private function bindParameter(ContainerBuilder $container, $name, $value)
     {
-        if( is_array($value) )
-        {
+        if( is_array($value) ) {
 
-            foreach( $value as $index => $val )
-            {
+            foreach( $value as $index => $val ) {
                 $this->bindParameter($container, $name.'.'.$index, $val);
             }
             $container->setParameter($name, $value);
-        }
-        else
-        {
+        } else {
             $container->setParameter($name, $value);
         }
     }
