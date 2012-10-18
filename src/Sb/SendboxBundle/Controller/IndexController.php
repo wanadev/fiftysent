@@ -165,7 +165,8 @@ class IndexController extends Controller
     return $retour;
   }
 
-  private function returnFileSize($fileSize) {
+  private function returnFileSize($fileSize)
+  {
     switch ($fileSize) {
       case ($fileSize < 1024):
           return $fileSize.' B';
