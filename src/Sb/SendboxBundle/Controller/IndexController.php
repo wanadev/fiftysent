@@ -84,7 +84,7 @@ class IndexController extends Controller
   public function downloadAction(Request $request, $token)
   {
     $newsXML = simplexml_load_file($this->getPathByToken($token).$token.'.xml');
-    foreach($newsXML->file as $f) {
+    foreach ($newsXML->file as $f) {
       $files[] = array('name' => "$f", "size" => $this->returnFileSize($f->attributes()->size));
     }
     return $this->container->get('templating')->renderResponse('SbSendboxBundle:Index:download.html.twig', array('token' => $token, 'files' => $files));
