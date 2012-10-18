@@ -32,8 +32,8 @@ class IndexController extends Controller
     $result = $uploader->save();
     $result = json_decode($result, true);
 
-    if(array_key_exists('success', $result) && $result['success'] == true) {
-      if(file_exists($path.$token.'.xml')) {
+    if (array_key_exists('success', $result) && $result['success'] == true) {
+      if (file_exists($path.$token.'.xml')) {
         $newsXML = simplexml_load_file($path.$token.'.xml');
       } else {
         $newsXML = new SimpleXMLElement("<upload></upload>");
