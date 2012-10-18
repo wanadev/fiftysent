@@ -166,7 +166,7 @@ class IndexController extends Controller
   }
 
   private function returnFileSize($fileSize) {
-    switch ($fileSize) :
+    switch ($fileSize) {
       case ($fileSize < 1024):
           return $fileSize.' B';
       case ($fileSize > 1024 && $fileSize < 1048576):
@@ -181,6 +181,6 @@ class IndexController extends Controller
           return round($fileSize/1125899906842624, 1).' PB';
       default:
           return $fileSize;
-    endswitch;
+    }
   }
 }
