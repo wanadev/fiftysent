@@ -23,37 +23,30 @@ class IndexController extends Controller
   
   public function uploadAction(Request $request)
   {
-    // if ($request->isXmlHttpRequest()) {
-      $token =  $this->get('session')->get('token');
-      $this->get('session')->set('token', $token);
-      $allowedExtensions = array();
-      $sizeLimit = 10 * 1024 * 1024;
-      $path =  $this->getPathByToken($token);
-      $uploader = new SbUploader($sizeLimit, $path);
-      $uploader->isUnique();
-      $result = $uploader->save();
-      $result = json_decode($result, true);
+    $token =  $this->get('session')->get('token');
+    $this->get('session')->set('token', $token);
+    $allowedExtensions = array();
+    $sizeLimit = 10 * 1024 * 1024;
+    $path =  $this->getPathByToken($token);
+    $uploader = new SbUploader($sizeLimit, $path);
+    $uploader->isUnique();
+    $result = $uploader->save();
+    $result = json_decode($result, true);
 
-      if(array_key_exists('success', $result) && $result['success']==true)
-      {
-        if(file_exists($path.$token.'.xml'))
-        {
-          $newsXML = simplexml_load_file($path.$token.'.xml');
-        }
-        else {
-          $newsXML = new SimpleXMLElement("<upload></upload>");
-          $newsXML->addAttribute('token', $token);
-        }
-        $newsIntro = $newsXML->addChild('file',$result['filename']);
-        $newsIntro->addAttribute('size', filesize($path.$result['filename']));
-        $newsXML->saveXML($path.$token.'.xml');
+    if(array_key_exists('success', $result) && $result['success'] == true) {
+      if(file_exists($path.$token.'.xml')) {
+        $newsXML = simplexml_load_file($path.$token.'.xml');
       }
+      else {
+        $newsXML = new SimpleXMLElement("<upload></upload>");
+        $newsXML->addAttribute('token', $token);
+      }
+      $newsIntro = $newsXML->addChild('file',$result['filename']);
+      $newsIntro->addAttribute('size', filesize($path.$result['filename']));
+      $newsXML->saveXML($path.$token.'.xml');
+    }
 
-      return new Response(htmlspecialchars(json_encode($result), ENT_NOQUOTES));
-    // }
-    // else {
-    //   return new Response(htmlspecialchars('{"jsonrpc" : "2.0", "error" : {"code": 104, "message": "Hacking attempt."}, "id" : "id"}', ENT_NOQUOTES));
-    // }
+    return new Response(htmlspecialchars(json_encode($result), ENT_NOQUOTES));
   }
   
   public function sendAction(Request $request)
@@ -67,7 +60,8 @@ class IndexController extends Controller
 
     if (count($errors) > 0) {
         return new Response("L'email de l'emmetteur est invalide.");
-    } else {
+    }
+    else {
       $token = $this->get('session')->get('token');
       $newsXML = simplexml_load_file($this->getPathByToken($token).$token.'.xml');
       $size = 0;
@@ -145,7 +139,8 @@ class IndexController extends Controller
 
     if (count($errors) > 0) {
         return new Response(json_encode(array('status' => 'failure')));
-    } else {
+    }
+    else {
         return new Response(json_encode(array('status' => 'success', 'value' => $email)));
     }
   }
