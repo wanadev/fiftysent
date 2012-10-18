@@ -158,7 +158,7 @@ class IndexController extends Controller
     $chars = 'azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN1234567890';
     $retour = '';
 
-    for ($i=0;$i<$size;$i++) {
+    for ($i=0; $i<$size; $i++) {
       $retour .= $chars[rand(0, 35)];
     }
 
