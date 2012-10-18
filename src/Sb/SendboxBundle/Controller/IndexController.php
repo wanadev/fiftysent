@@ -64,7 +64,7 @@ class IndexController extends Controller
       $token = $this->get('session')->get('token');
       $newsXML = simplexml_load_file($this->getPathByToken($token).$token.'.xml');
       $size = 0;
-      foreach($newsXML->file as $f) {
+      foreach ($newsXML->file as $f) {
         $files[] = array('name' => "$f", "size" => $this->returnFileSize($f->attributes()->size));
         $size += $f->attributes()->size;
       }
