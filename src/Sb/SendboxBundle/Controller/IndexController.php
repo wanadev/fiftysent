@@ -143,7 +143,7 @@ class IndexController extends Controller
   {
     $md5 = str_split($token);
     $path = implode('/', $md5);
-    return $_SERVER['DOCUMENT_ROOT'].'/uploads/'.date('Y').'/'.date('m').'/'.$path.'/';
+    return $this->get('request')->server->get('DOCUMENT_ROOT').'/uploads/'.date('Y').'/'.date('m').'/'.$path.'/';
   }
   
   public function getUrlByToken($token)
