@@ -25,7 +25,6 @@ class IndexController extends Controller
   {
     $token =  $this->get('session')->get('token');
     $this->get('session')->set('token', $token);
-    $allowedExtensions = array();
     $sizeLimit = 10 * 1024 * 1024;
     $path =  $this->getPathByToken($token);
     $uploader = new SbUploader($sizeLimit, $path);
