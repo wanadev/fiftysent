@@ -1,9 +1,11 @@
 <?php
 namespace Sb\SendBoxBundle\Extension;
 
-class TwigExtension extends \Twig_Extension {
+class TwigExtension extends \Twig_Extension
+{
 
-    public function getFilters() {
+    public function getFilters()
+    {
         return array(
             'var_dump'   => new \Twig_Filter_Function('var_dump'),
         );
@@ -14,4 +16,3 @@ class TwigExtension extends \Twig_Extension {
         return 'twig_extension';
     }
 }
-?>
