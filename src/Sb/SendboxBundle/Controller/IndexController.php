@@ -40,7 +40,7 @@ class IndexController extends Controller
         $newsXML = new SimpleXMLElement("<upload></upload>");
         $newsXML->addAttribute('token', $token);
       }
-      $newsIntro = $newsXML->addChild('file',$result['filename']);
+      $newsIntro = $newsXML->addChild('file', $result['filename']);
       $newsIntro->addAttribute('size', filesize($path.$result['filename']));
       $newsXML->saveXML($path.$token.'.xml');
     }
