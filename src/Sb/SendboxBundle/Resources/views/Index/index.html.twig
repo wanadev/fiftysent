@@ -46,17 +46,36 @@
       if($(this).val()=="Votre email"){ 
         $(this).val('');
       }
-   });
-   $("#fromMail").blur(function() {
+    });
+    $("#fromMail").blur(function() {
       if($(this).val()==""){
         $(this).val('Votre email');
       }
-   });
+    });
+
+    $('#pickfiles').bind('dragenter', function() {
+      $(this).css({
+        'background-color': '#fafafa'
+      });
+    });
+
+    $('#pickfiles').bind('dragleave', function() {
+      $(this).css({
+        'background-color': 'transparent'
+      });
+    });
+
+    $('#pickfiles').bind('drop', function() {
+      $(this).css({
+        'background-color': 'transparent'
+      });
+    });
     
     var uploader = new plupload.Uploader({
       runtimes : 'html5,flash',
       flash_swf_url : '{{ asset('/bundles/sbsendbox/js/plupload.flash.swf') }}',
       browse_button : 'pickfiles',
+      drop_element: 'pickfiles',
       container: 'uploader',
       max_file_size : '1gb',
       chunk_size : '5mb',
@@ -65,7 +84,7 @@
 
     uploader.bind('Init', function(up, params) {
       $('#pickfiles').html("");
-      $('#pickfiles').append('<em style="text-align:center">Cliquez ici pour t&eacute;l&eacute;charger des fichiers</em>')
+      $('#pickfiles').append('<em style="text-align:center">Cliquez ou droppez pour t&eacute;l&eacute;charger des fichiers</em>')
     });
 
     uploader.bind('FilesAdded', function(up, files) {
