@@ -11,17 +11,17 @@ Récupérer les sources
 Paramétrages de base
 --------------------
 
-    mv app/config/parameters.yml.example app/config/parameters.yml
+    cp app/config/parameters.yml.example app/config/parameters.yml
 
 Récupérer Composer
 ------------------
 
-    $ curl -s https://getcomposer.org/installer | php
+    curl -sS https://getcomposer.org/installer | php
 
 Installation des vendors
 ------------------------
 
-Vérifiez que l'extension _phar.so_ et _zip.so_ sont activées dans votre _php.ini_.
+Vérifiez que l'extension `phar.so` et `zip.so` sont activées dans votre `php.ini`.
 
     php composer.phar install
 
