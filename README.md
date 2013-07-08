@@ -1,4 +1,4 @@
-[![Build Status](http://jenkins.wanadev.org/job/FiftySent/badge/icon)](http://jenkins.wanadev.org/job/FiftySent/)
+[![Dependency Status](https://www.versioneye.com/user/projects/51bc76305e594d0002016bc8/badge.png)](https://www.versioneye.com/user/projects/51bc76305e594d0002016bc8)
 
 Installation de FiftySent
 =========================
